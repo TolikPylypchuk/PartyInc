@@ -55,6 +55,7 @@
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Domain.fs" />
     <Compile Include="Luis.fs" />
+    <Compile Include="PrologInterop.fs" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
