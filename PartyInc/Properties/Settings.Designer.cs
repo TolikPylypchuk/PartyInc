@@ -8,23 +8,43 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PartyInc.Properties
-{
-
-
-	[global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
-	internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
-	{
-
-		private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-
-		public static Settings Default
-		{
-			get
-			{
-				return defaultInstance;
-			}
-		}
-	}
+namespace PartyInc.Properties {
+    
+    
+    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.3.0.0")]
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("9ba3a372-1892-4ec7-b710-3e6b8008a4ab")]
+        public string SweetsOrderConsultantId {
+            get {
+                return ((string)(this["SweetsOrderConsultantId"]));
+            }
+            set {
+                this["SweetsOrderConsultantId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("efbef2bd3bf642d2a371e49127091535")]
+        public string SweetsOrderConsultantSubscriptionKey {
+            get {
+                return ((string)(this["SweetsOrderConsultantSubscriptionKey"]));
+            }
+            set {
+                this["SweetsOrderConsultantSubscriptionKey"] = value;
+            }
+        }
+    }
 }
