@@ -14,7 +14,7 @@ namespace PartyInc
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.test.Text = await Luis.requestTask(
+            this.test.Text = await Luis.request(
                 Settings.Default.SweetsOrderConsultantId,
                 Settings.Default.SweetsOrderConsultantSubscriptionKey,
                 "Hello!");
