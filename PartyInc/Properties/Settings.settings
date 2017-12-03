@@ -1,7 +1,12 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PartyInc.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SweetsOrderConsultantId" Type="System.String" Scope="User">
+      <Value Profile="(Default)">9ba3a372-1892-4ec7-b710-3e6b8008a4ab</Value>
+    </Setting>
+    <Setting Name="SweetsOrderConsultantSubscriptionKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">efbef2bd3bf642d2a371e49127091535</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>
