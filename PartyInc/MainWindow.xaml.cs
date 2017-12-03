@@ -17,7 +17,10 @@ namespace PartyInc
             this.test.Text = await Luis.request(
                 Settings.Default.SweetsOrderConsultantId,
                 Settings.Default.SweetsOrderConsultantSubscriptionKey,
-                "Hello!");
+                "I really like chocolate and bananas!");
+
+            Luis.Response response = Luis.parseResponse(this.test.Text);
+            this.test.Text = response.ToString();
         }
     }
 }
