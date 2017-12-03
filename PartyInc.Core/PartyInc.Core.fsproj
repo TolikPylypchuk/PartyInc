@@ -53,6 +53,7 @@
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="Domain.fs" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

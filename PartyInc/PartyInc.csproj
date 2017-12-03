@@ -98,5 +98,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PartyInc.Core\PartyInc.Core.fsproj">
+      <Project>{4a620780-0bd5-4eed-b7bf-0f1a3b1a101e}</Project>
+      <Name>PartyInc.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
