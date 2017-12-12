@@ -38,8 +38,7 @@ type Order = {
     Drinks: Drink list
 }
 
-//This type is used to store the ingredients which should and shouldn't be in a recipe
 type Preferences = {
-    Positive: string list
-    Negative: string list
+    Include: string list
+    Exclude: string list
 }
