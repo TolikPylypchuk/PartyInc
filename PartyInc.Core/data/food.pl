@@ -63,21 +63,21 @@ getCakeByPriceMoreEqualThan(
 
 %rules(cake, ingredients)
 
-getCakeByIngredientsPresent(
-                               IngredientsToBeInAReceipe,
+getCakeByIngredientsInclude(
+                               IngredientsInclude,
                                cake(Name, Ingredients, Price)
                                ) :-
     cake(Name, Ingredients, Price),
-    member(IngredientToBeInAReceipe, IngredientsToBeInAReceipe),
-    member(IngredientToBeInAReceipe, Ingredients).
+    member(IngredientInclude, IngredientsInclude),
+    member(IngredientInclude, Ingredients).
   
-getCakeByIngredientsAbsent(
-                              IngredientsNotToBeInAReceipe,
-                              cake(Name, Ingredients, Price)
-                              ) :-
+getCakeByIngredientsExclude(
+								IngredientsExclude,
+								cake(Name, Ingredients, Price)
+								) :-
     cake(Name, Ingredients, Price),
-    member(IngredientNotToBeInAReceipe, IngredientsNotToBeInAReceipe),
-    not(member(IngredientNotToBeInAReceipe, Ingredients)).
+    member(IngredientExclude, IngredientsExclude),
+    not(member(IngredientExclude, Ingredients)).
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
