@@ -17,7 +17,7 @@ namespace PartyInc
             this.test.Text = await Luis.request(
                 Settings.Default.SweetsOrderConsultantId,
                 Settings.Default.SweetsOrderConsultantSubscriptionKey,
-                "I really like chocolate and bananas!");
+                "Order a cake"); //I think about 1.5 kg
 
             Luis.Response response = Luis.parseResponse(this.test.Text);
             this.test.Text = response.ToString();

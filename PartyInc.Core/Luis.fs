@@ -46,11 +46,31 @@ type Entity = {
         Resolution = if parsedEntity.Resolution <> null then Some({ Values = parsedEntity.Resolution.Values }) else None
     }
 
+type Child = {
+    Type: string
+    Value: string
+}
+
+type CompositeEntity = {
+    ParentType: string
+    Value: string
+    Children: Child list
+}
+
+[<AllowNullLiteral>]
+type ParsedCompositeEntities(values : CompositeEntity list) =
+    member __.Values = values
+
+type CompositeEntities = {
+    Values: CompositeEntity list
+}
+
 type ParsedResponse = {
     Query: string
     TopScoringIntent: Intent
     Intents: Intent list
     Entities: ParsedEntity list
+    CompositeEntities: ParsedCompositeEntities
 }
 
 type Response = {
@@ -58,6 +78,7 @@ type Response = {
     TopScoringIntent: Intent
     Intents: Intent list
     Entities: Entity list
+    CompositeEntities: CompositeEntities option
 } with
     static member FromParsedResponse(parsedResponse : ParsedResponse) =
         {
@@ -65,6 +86,10 @@ type Response = {
             TopScoringIntent = parsedResponse.TopScoringIntent
             Intents = parsedResponse.Intents
             Entities = parsedResponse.Entities |> List.map Entity.FromParsedEntity
+            CompositeEntities = 
+                if parsedResponse.CompositeEntities <> null then 
+                    Some({ Values = parsedResponse.CompositeEntities.Values }) 
+                else None
         }
 
 let requestAsync (luisAppId : string) (subscriptionKey : string) query = async {
