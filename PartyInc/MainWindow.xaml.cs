@@ -12,7 +12,7 @@ namespace PartyInc
 			this.InitializeComponent();
 		}
 
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
+		private async void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			var bot = new BotInfo(
 				Settings.Default.SweetsOrderConsultantId,
@@ -28,10 +28,10 @@ namespace PartyInc
 			this.AddLine(orderCake);
 			this.AddLine(await Bot.RespondTemporary(bot, orderCake));
 
-			const string yesBananasStrrawberry = "Yes, I like bananas and strawberry.";
+			const string yesBananasStrawberry = "Yes, I like bananas and strawberry.";
 
-			this.AddLine(yesBananasStrrawberry);
-			this.AddLine(await Bot.RespondTemporary(bot, yesBananasStrrawberry));
+			this.AddLine(yesBananasStrawberry);
+			this.AddLine(await Bot.RespondTemporary(bot, yesBananasStrawberry));
 
 			const string yesChocolate = "Yes, I'm allergic to chocolate.";
 
@@ -57,11 +57,11 @@ namespace PartyInc
 
 			this.AddLine(end);
 			this.AddLine(await Bot.RespondTemporary(bot, end));
-        }
+		}
 
 		private void AddLine(string text)
 		{
 			this.test.Text += $" - {text}\n\n";
 		}
-    }
+	}
 }
