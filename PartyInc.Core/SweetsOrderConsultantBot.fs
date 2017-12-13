@@ -13,6 +13,6 @@ type SweetsOrderConsultantBot = class
     
     override __.Response query =
         let responseObj = (request __.Id __.SubscriptionKey query).Result |> parseResponse
-        let responseVariants = __.Responses.Item responseObj.TopScoringIntent.Intent
+        let responseVariants = __.ResponseVariants.Item responseObj.TopScoringIntent.Intent
         responseVariants.Item((new Random()).Next(0,responseVariants.Length))
 end
