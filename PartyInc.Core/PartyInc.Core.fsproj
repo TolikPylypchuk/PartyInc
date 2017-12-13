@@ -62,9 +62,11 @@
     <None Include="Data\food.pl" />
     <None Include="Data\food_queries.pl" />
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="OptionConverter.fs" />
+    <Compile Include="Json.fs" />
     <Compile Include="Domain.fs" />
     <Compile Include="Luis.fs" />
-    <Compile Include="ResponseVariants.fs" />
+    <Compile Include="ResponseChoices.fs" />
     <Compile Include="Bot.fs" />
     <Compile Include="PrologInterop.fs" />
     <Content Include="packages.config" />

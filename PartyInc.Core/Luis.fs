@@ -4,28 +4,13 @@ open System
 open System.Net.Http
 open System.Web
 
-open Newtonsoft.Json
-
 type Intent = {
     Intent: string
     Score: float
 }
 
-[<AllowNullLiteral>]
-type private ParsedResolution(values : string list) =
-    member __.Values = values
-
 type Resolution = {
     Values: string list
-}
-
-type private ParsedEntity = {
-    Entity: string
-    Type: string
-    StartIndex: int
-    EndIndex: int
-    Score: Nullable<float>
-    Resolution: ParsedResolution
 }
 
 type Entity = {
@@ -48,59 +33,16 @@ type CompositeEntity = {
     Children: Child list
 }
 
-[<AllowNullLiteral>]
-type private ParsedCompositeEntities(values : CompositeEntity list) =
-    member __.Values = values
-
-type CompositeEntities = {
-    Values: CompositeEntity list
-}
-
-type private ParsedResponse = {
-    Query: string
-    TopScoringIntent: Intent
-    Intents: Intent list
-    Entities: ParsedEntity list
-    CompositeEntities: ParsedCompositeEntities
-}
-
 type Response = {
     Query: string
     TopScoringIntent: Intent
     Intents: Intent list
     Entities: Entity list
-    CompositeEntities: CompositeEntities option
+    CompositeEntities: CompositeEntity list option
 }
 
 module Luis =
-
-    let private toEntity (parsedEntity : ParsedEntity) = {
-        Entity = parsedEntity.Entity
-        Type = parsedEntity.Type
-        StartIndex = parsedEntity.StartIndex
-        EndIndex = parsedEntity.EndIndex
-        Score =
-            if parsedEntity.Score.HasValue
-            then Some(parsedEntity.Score.Value)
-            else None
-        Resolution =
-            if parsedEntity.Resolution <> null
-            then Some({ Values = parsedEntity.Resolution.Values })
-            else None
-    }
-
-    let private toResponse (parsedResponse: ParsedResponse) = {
-        Query = parsedResponse.Query
-        TopScoringIntent = parsedResponse.TopScoringIntent
-        Intents = parsedResponse.Intents
-        Entities = parsedResponse.Entities |> List.map toEntity
-        CompositeEntities = 
-            if parsedResponse.CompositeEntities <> null
-            then Some({ Values = parsedResponse.CompositeEntities.Values }) 
-            else None
-    }
-
-    [<CompiledName("RequestAsync")>]
+    
     let requestAsync luisAppId (subscriptionKey : string) query = async {
         use client =  new HttpClient()
         let queryString = HttpUtility.ParseQueryString(String.Empty)
@@ -125,13 +67,8 @@ module Luis =
 
         return! response.Content.ReadAsStringAsync() |> Async.AwaitTask
     }
-
-    [<CompiledName("Request")>]
-    let request luisAppId subscriptionKey query =
-        requestAsync luisAppId subscriptionKey query |> Async.StartAsTask
-
+    
     [<CompiledName("ParseResponse")>]
     let parseResponse responseJson = 
         responseJson
-        |> JsonConvert.DeserializeObject<ParsedResponse>
-        |> toResponse
+        |> Json.deserialize<Response>

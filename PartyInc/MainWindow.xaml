@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" Loaded="Window_Loaded"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Party Inc" Height="350" Width="525">
 	<Grid>
-        <TextBox x:Name="test"/>
+		<TextBox x:Name="test" IsReadOnly="True" TextWrapping="Wrap" />
     </Grid>
 </Window>

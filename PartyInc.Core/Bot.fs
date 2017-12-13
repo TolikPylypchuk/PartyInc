@@ -23,9 +23,9 @@ module Bot =
             let! responseJson = requestAsync botInfo.Id botInfo.SubscriptionKey query
             let responce = responseJson |> parseResponse
 
-            let responseVariants =
-                ResponseVariants.sweetsOrderConsultant.[responce.TopScoringIntent.Intent]
-            return responseVariants.[Random().Next(0,responseVariants.Length)]
+            let responseChoices =
+                ResponseChoices.sweetsOrderConsultant.[responce.TopScoringIntent.Intent]
+            return responseChoices.[Random().Next(0,responseChoices.Length)]
         // TODO add other types
     }
 

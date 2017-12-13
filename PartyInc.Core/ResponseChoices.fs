@@ -1,5 +1,5 @@
 ﻿[<RequireQualifiedAccess>]
-module PartyInc.Core.ResponseVariants
+module PartyInc.Core.ResponseChoices
 
 let sweetsOrderConsultant =
     Map.empty
@@ -75,6 +75,6 @@ let sweetsOrderConsultant =
         .Add("welcome", 
             [
                 "Good day! You are looking for some tasties, don't do?";
-                "Hello!How can I help you?";
+                "Hello! How can I help you?";
                 "Greetings! What do you want to order?"
             ])
