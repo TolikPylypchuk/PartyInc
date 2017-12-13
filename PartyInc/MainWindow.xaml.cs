@@ -1,7 +1,8 @@
 ﻿using System.Windows;
 
-using PartyInc.Core;
 using PartyInc.Properties;
+
+using PartyInc.Core.Bots;
 
 namespace PartyInc
 {
@@ -12,15 +13,14 @@ namespace PartyInc
 			this.InitializeComponent();
 		}
 
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.test.Text = await Luis.request(
+            LuisBot.LuisBot bot;
+            bot = new SweetsOrderConsultantBot.SweetsOrderConsultantBot(
                 Settings.Default.SweetsOrderConsultantId,
-                Settings.Default.SweetsOrderConsultantSubscriptionKey,
-                "Order a cake"); //I think about 1.5 kg
+                Settings.Default.SweetsOrderConsultantSubscriptionKey);
 
-            Luis.Response response = Luis.parseResponse(this.test.Text);
-            this.test.Text = response.ToString();
+            this.test.Text = bot.Response("Order a cake"); //I think, about 1.5 kg
         }
     }
 }

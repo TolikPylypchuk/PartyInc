@@ -65,7 +65,8 @@
     <Compile Include="PrologInterop.fs" />
     <Content Include="packages.config" />
     <None Include="data\food.pl" />
-    <Compile Include="bots\FoodBot.fs" />
+    <Compile Include="LuisBot.fs" />
+    <Compile Include="SweetsOrderConsultantBot.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Chessie">
