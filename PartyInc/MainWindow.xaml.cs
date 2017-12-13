@@ -14,12 +14,12 @@ namespace PartyInc
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.test.Text = await Luis.request(
+            this.test.Text = await Luis.Request(
                 Settings.Default.SweetsOrderConsultantId,
                 Settings.Default.SweetsOrderConsultantSubscriptionKey,
                 "I really like chocolate and bananas!");
 
-            Luis.Response response = Luis.parseResponse(this.test.Text);
+            Response response = Luis.ParseResponse(this.test.Text);
             this.test.Text = response.ToString();
         }
     }
