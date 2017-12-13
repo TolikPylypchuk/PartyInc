@@ -25,7 +25,7 @@ namespace PartyInc
             this.test.Text = bot.Response("Yes, I like bananas and strawberry.");
             this.test.Text = bot.Response("Yes, I'm allergic to chocolate.");
             this.test.Text = bot.Response("Maybe, 3 killos.");
-            this.test.Text = bot.Response("I want it to be in range between $50 and $100.");
+            //this.test.Text = bot.Response("I want it to be in range between $50 and $100.");
             //this.test.Text = bot.Response("I think, about 1.5 kg")
             this.test.Text = bot.Response("No, that's it.");
         }
