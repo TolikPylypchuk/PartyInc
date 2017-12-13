@@ -59,14 +59,15 @@
     <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets'))" />
   </Target>
   <ItemGroup>
+    <None Include="Data\food.pl" />
+    <None Include="Data\food_queries.pl" />
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Domain.fs" />
     <Compile Include="Luis.fs" />
+    <Compile Include="ResponseVariants.fs" />
+    <Compile Include="Bot.fs" />
     <Compile Include="PrologInterop.fs" />
     <Content Include="packages.config" />
-    <None Include="data\food.pl" />
-    <Compile Include="LuisBot.fs" />
-    <Compile Include="SweetsOrderConsultantBot.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Chessie">
