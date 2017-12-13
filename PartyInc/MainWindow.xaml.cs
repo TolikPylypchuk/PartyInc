@@ -15,10 +15,9 @@ namespace PartyInc
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            LuisBot.LuisBot bot;
-            bot = new SweetsOrderConsultantBot.SweetsOrderConsultantBot(
-                Settings.Default.SweetsOrderConsultantId,
-                Settings.Default.SweetsOrderConsultantSubscriptionKey);
+			LuisBot.LuisBot bot = new SweetsOrderConsultantBot.SweetsOrderConsultantBot(
+				Settings.Default.SweetsOrderConsultantId,
+				Settings.Default.SweetsOrderConsultantSubscriptionKey);
             
             this.test.Text = bot.Response("Hi!");
             this.test.Text = bot.Response("Order a cake");
