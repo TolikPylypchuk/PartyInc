@@ -1,9 +1,8 @@
 ﻿namespace PartyInc.Core
 
-open System
-
 open PartyInc.Core
 open PartyInc.Core.Luis
+open PartyInc.Core.ResponseManager
 
 type BotInfo = {
     Id: string
@@ -19,13 +18,9 @@ module Bot =
     let respond botInfo query botType = async {
         match botType with
         | SweetsOrderConsultant ->
-
             let! responseJson = requestAsync botInfo.Id botInfo.SubscriptionKey query
-            let responce = responseJson |> parseResponse
-
-            let responseChoices =
-                ResponseChoices.sweetsOrderConsultant.[responce.TopScoringIntent.Intent]
-            return responseChoices.[Random().Next(0,responseChoices.Length)]
+            let response = responseJson |> parseResponse
+            return ResponseManager.manageResponse(response)
         // TODO add other types
     }
 

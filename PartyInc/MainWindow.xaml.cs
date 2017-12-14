@@ -23,7 +23,7 @@ namespace PartyInc
 			this.AddLine(hi);
 			this.AddLine(await Bot.RespondTemporary(bot, hi));
 
-			const string orderCake = "Order a cake";
+			const string orderCake = "I want to order a cake.";
 
 			this.AddLine(orderCake);
 			this.AddLine(await Bot.RespondTemporary(bot, orderCake));
