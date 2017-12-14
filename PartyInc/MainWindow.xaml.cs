@@ -38,11 +38,6 @@ namespace PartyInc
 			this.AddLine(yesChocolate);
 			this.AddLine(await Bot.RespondTemporary(bot, yesChocolate));
 
-			const string threeKilos = "Maybe, 3 killos.";
-
-			this.AddLine(threeKilos);
-			this.AddLine(await Bot.RespondTemporary(bot, threeKilos));
-
 			const string range = "I want it to be in range between $50 and $100.";
 
 			this.AddLine(range);
