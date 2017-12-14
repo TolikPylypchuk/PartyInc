@@ -15,16 +15,12 @@ type BotType =
     
 module Bot =
 
-    let respond botInfo query botType = async {
-        match botType with
-        | SweetsOrderConsultant ->
-            let! responseJson = requestAsync botInfo.Id botInfo.SubscriptionKey query
-            let response = responseJson |> parseResponse
-            return ResponseManager.manageResponse(response)
-        // TODO add other types
+    let respondAsync botInfo query = async {
+        let! responseJson = requestAsync botInfo.Id botInfo.SubscriptionKey query
+        let response = responseJson |> parseResponse
+        return! ResponseManager.manageResponse(response)
     }
 
-    [<CompiledName("RespondTemporary")>]
-    let respondTemporary botInfo query =
-        respond botInfo query SweetsOrderConsultant
-        |> Async.StartAsTask
+    [<CompiledName("Respond")>]
+    let respond botInfo query =
+        respondAsync botInfo query |> Async.StartAsTask

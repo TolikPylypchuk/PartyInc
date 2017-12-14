@@ -27,7 +27,7 @@ cookie("Americano", 44.5).
 
 cookie("Strawberry Kifli", 56.0).
 
-cookie("Chacolate Kifli", 64.2).
+cookie("Chocolate Kifli", 64.2).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

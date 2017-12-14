@@ -17,42 +17,93 @@ namespace PartyInc
 			var bot = new BotInfo(
 				Settings.Default.SweetsOrderConsultantId,
 				Settings.Default.SweetsOrderConsultantSubscriptionKey);
+            
+            const string dialogStarted = "###DIALOG STARTED###\n";
 
-			const string hi = "Hi!";
+            this.test.Text += dialogStarted;
 
+            const string hi = "Hi!";
 			this.AddLine(hi);
-			this.AddLine(await Bot.RespondTemporary(bot, hi));
+			this.AddLine(await Bot.Respond(bot, hi));
 
 			const string orderCake = "I want to order a cake.";
-
 			this.AddLine(orderCake);
-			this.AddLine(await Bot.RespondTemporary(bot, orderCake));
+			this.AddLine(await Bot.Respond(bot, orderCake));
 
-			const string yesBananasStrawberry = "Yes, I like bananas and strawberry.";
+            const string yesPreferences = "Yes, let's discuss ingredients.";
+            this.AddLine(yesPreferences);
+            this.AddLine(await Bot.Respond(bot, yesPreferences));
 
+            const string yesBananasStrawberry = "Yes, I like bananas and strawberry.";
 			this.AddLine(yesBananasStrawberry);
-			this.AddLine(await Bot.RespondTemporary(bot, yesBananasStrawberry));
+			this.AddLine(await Bot.Respond(bot, yesBananasStrawberry));
 
-			const string yesChocolate = "Yes, I'm allergic to chocolate.";
+			const string noChocolate = "Yes, I'm allergic to chocolate.";
+			this.AddLine(noChocolate);
+			this.AddLine(await Bot.Respond(bot, noChocolate));
 
-			this.AddLine(yesChocolate);
-			this.AddLine(await Bot.RespondTemporary(bot, yesChocolate));
+            const string rangeCake = "I want it to be in range between $75 and $130.";
+            this.AddLine(rangeCake);
+            this.AddLine(await Bot.Respond(bot, rangeCake));
 
-			const string range = "I want it to be in range between $50 and $100.";
+            const string cakeName = "Fruitty, I guess.";
+            this.AddLine(cakeName);
+            this.AddLine(await Bot.Respond(bot, cakeName));
 
-			this.AddLine(range);
-			this.AddLine(await Bot.RespondTemporary(bot, range));
+            const string orderCookies = "I also want to order some cookies.";
+            this.AddLine(orderCookies);
+            this.AddLine(await Bot.Respond(bot, orderCookies));
 
-			const string kiloAndHalf = "I think, about 1.5 kg";
+            const string rangeCookies = "I want it to be in range between $40 and $70.";
+            this.AddLine(rangeCookies);
+            this.AddLine(await Bot.Respond(bot, rangeCookies));
 
-			this.AddLine(kiloAndHalf);
-			this.AddLine(await Bot.RespondTemporary(bot, kiloAndHalf));
+            const string cookieName = "Maybe, Chocolate Kifli.";
+            this.AddLine(cookieName);
+            this.AddLine(await Bot.Respond(bot, cookieName));
 
-			const string end = "No, that's it.";
+            const string kilo = "I think, about 1 kilogram.";
+            this.AddLine(kilo);
+            this.AddLine(await Bot.Respond(bot, kilo));
 
-			this.AddLine(end);
-			this.AddLine(await Bot.RespondTemporary(bot, end));
-		}
+            const string orderCandies = "I also want to order some candies.";
+            this.AddLine(orderCandies);
+            this.AddLine(await Bot.Respond(bot, orderCandies));
+
+            const string rangeCandies = "I want it to be in range between $50 and $90.";
+            this.AddLine(rangeCandies);
+            this.AddLine(await Bot.Respond(bot, rangeCandies));
+
+            const string candyName = "I want to order Snickers.";
+            this.AddLine(candyName);
+            this.AddLine(await Bot.Respond(bot, candyName));
+
+            const string kiloAndHalf = "I think, about 1.5 kg.";
+            this.AddLine(kiloAndHalf);
+            this.AddLine(await Bot.Respond(bot, kiloAndHalf));
+
+            const string endConversation = "No, that's all order.";
+            this.AddLine(endConversation);
+            this.AddLine(await Bot.Respond(bot, endConversation));
+
+            this.test.Text += dialogStarted;
+            
+            this.AddLine(hi);
+            this.AddLine(await Bot.Respond(bot, hi));
+            
+            this.AddLine(orderCake);
+            this.AddLine(await Bot.Respond(bot, orderCake));
+
+            const string noPreferences = "No, not interested.";
+            this.AddLine(noPreferences);
+            this.AddLine(await Bot.Respond(bot, noPreferences));
+
+            this.AddLine(cakeName);
+            this.AddLine(await Bot.Respond(bot, cakeName));
+
+            this.AddLine(endConversation);
+            this.AddLine(await Bot.Respond(bot, endConversation));
+        }
 
 		private void AddLine(string text)
 		{
