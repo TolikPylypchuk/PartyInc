@@ -3,9 +3,10 @@
 open System
 
 open PartyInc.Core
+open PartyInc.Core.BotStates
 
 [<CompiledName("ManageResponse")>]
-let manageResponse response =
+let manageResponse (response: Response) =
     match response.TopScoringIntent.Intent with
     | "order.all.price"
     | "order.cake"

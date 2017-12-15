@@ -1,6 +1,7 @@
 ﻿namespace PartyInc.Core
 
 open PartyInc.Core
+open PartyInc.Core.BotStates
 open PartyInc.Core.Luis
 
 type ResponseHandler = delegate of Response -> string

@@ -66,9 +66,10 @@
     <Compile Include="Json.fs" />
     <Compile Include="Domain.fs" />
     <Compile Include="Luis.fs" />
+    <Compile Include="BotStates.fs" />
+    <Compile Include="Bot.fs" />
     <Compile Include="ResponseChoices.fs" />
     <Compile Include="SweetsOrderConsultant.fs" />
-    <Compile Include="Bot.fs" />
     <Compile Include="PrologInterop.fs" />
     <Content Include="packages.config" />
   </ItemGroup>
