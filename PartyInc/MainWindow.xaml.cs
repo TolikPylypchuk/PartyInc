@@ -5,42 +5,43 @@ using PartyInc.Properties;
 
 namespace PartyInc
 {
-	public partial class MainWindow : Window
-	{
-		public MainWindow()
-		{
-			this.InitializeComponent();
-		}
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            this.InitializeComponent();
+        }
 
-		private async void Window_Loaded(object sender, RoutedEventArgs e)
-		{
-			var bot = new BotInfo(
-				Settings.Default.SweetsOrderConsultantId,
-				Settings.Default.SweetsOrderConsultantSubscriptionKey);
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            var bot = new BotInfo(
+                Settings.Default.SweetsOrderConsultantId,
+                Settings.Default.SweetsOrderConsultantSubscriptionKey,
+                SweetsOrderConsultant.ManageResponse);
             
             const string dialogStarted = "###DIALOG STARTED###\n";
 
             this.test.Text += dialogStarted;
 
             const string hi = "Hi!";
-			this.AddLine(hi);
-			this.AddLine(await Bot.RespondAsync(bot, hi));
+            this.AddLine(hi);
+            this.AddLine(await Bot.RespondAsync(bot, hi));
 
-			const string orderCake = "I want to order a cake.";
-			this.AddLine(orderCake);
-			this.AddLine(await Bot.RespondAsync(bot, orderCake));
+            const string orderCake = "I want to order a cake.";
+            this.AddLine(orderCake);
+            this.AddLine(await Bot.RespondAsync(bot, orderCake));
 
             const string yesPreferences = "Yes, let's discuss ingredients.";
             this.AddLine(yesPreferences);
             this.AddLine(await Bot.RespondAsync(bot, yesPreferences));
 
             const string yesBananasStrawberry = "Yes, I like bananas and strawberry.";
-			this.AddLine(yesBananasStrawberry);
-			this.AddLine(await Bot.RespondAsync(bot, yesBananasStrawberry));
+            this.AddLine(yesBananasStrawberry);
+            this.AddLine(await Bot.RespondAsync(bot, yesBananasStrawberry));
 
-			const string noChocolate = "Yes, I'm allergic to chocolate.";
-			this.AddLine(noChocolate);
-			this.AddLine(await Bot.RespondAsync(bot, noChocolate));
+            const string noChocolate = "Yes, I'm allergic to chocolate.";
+            this.AddLine(noChocolate);
+            this.AddLine(await Bot.RespondAsync(bot, noChocolate));
 
             const string rangeCake = "I want it to be in range between $75 and $130.";
             this.AddLine(rangeCake);
@@ -105,9 +106,9 @@ namespace PartyInc
             this.AddLine(await Bot.RespondAsync(bot, endConversation));
         }
 
-		private void AddLine(string text)
-		{
-			this.test.Text += $" - {text}\n\n";
-		}
-	}
+        private void AddLine(string text)
+        {
+            this.test.Text += $" - {text}\n\n";
+        }
+    }
 }

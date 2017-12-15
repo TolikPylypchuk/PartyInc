@@ -72,9 +72,9 @@ getCakeByIngredientsInclude(
     member(IngredientInclude, Ingredients).
   
 getCakeByIngredientsExclude(
-								IngredientsExclude,
-								cake(Name, Ingredients, Price)
-								) :-
+                                IngredientsExclude,
+                                cake(Name, Ingredients, Price)
+                                ) :-
     cake(Name, Ingredients, Price),
     member(IngredientExclude, IngredientsExclude),
     not(member(IngredientExclude, Ingredients)).

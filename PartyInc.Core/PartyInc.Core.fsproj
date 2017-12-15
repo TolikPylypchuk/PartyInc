@@ -67,7 +67,7 @@
     <Compile Include="Domain.fs" />
     <Compile Include="Luis.fs" />
     <Compile Include="ResponseChoices.fs" />
-    <Compile Include="ResponseManager.fs" />
+    <Compile Include="SweetsOrderConsultant.fs" />
     <Compile Include="Bot.fs" />
     <Compile Include="PrologInterop.fs" />
     <Content Include="packages.config" />

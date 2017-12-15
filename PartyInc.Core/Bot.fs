@@ -2,24 +2,22 @@
 
 open PartyInc.Core
 open PartyInc.Core.Luis
-open PartyInc.Core.ResponseManager
+
+type ResponseHandler = delegate of Response -> string
 
 type BotInfo = {
     Id: string
     SubscriptionKey: string
+    Respond: ResponseHandler
 }
 
-type BotType =
-    | SweetsOrderConsultant
-    // TODO Add other types
-    
 module Bot =
 
     [<CompiledName("RespondAsync")>]
-    let respondAsync botInfo query =
+    let respondAsync bot query =
         async {
-            let! responseJson = requestAsync botInfo.Id botInfo.SubscriptionKey query
+            let! responseJson = requestAsync bot.Id bot.SubscriptionKey query
             let response = responseJson |> parseResponse
-            return! ResponseManager.manageResponse(response)
+            return bot.Respond.Invoke(response)
         }
         |> Async.StartAsTask

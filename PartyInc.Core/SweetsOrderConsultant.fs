@@ -1,10 +1,11 @@
-﻿module PartyInc.Core.ResponseManager
+﻿module PartyInc.Core.SweetsOrderConsultant
 
 open System
 
 open PartyInc.Core
 
-let manageResponse response = async {
+[<CompiledName("ManageResponse")>]
+let manageResponse response =
     match response.TopScoringIntent.Intent with
     | "order.all.price"
     | "order.cake"
@@ -21,7 +22,6 @@ let manageResponse response = async {
     | "welcome" ->
         let responseChoices =
             ResponseChoices.sweetsOrderConsultant.[response.TopScoringIntent.Intent]
-        return responseChoices.[Random().Next(0,responseChoices.Length)]
+        responseChoices.[Random().Next(0,responseChoices.Length)]
     | _ -> 
-        return "Sorry. I didn't get you. Can you repeat, please?"
-}
+        "Sorry. I didn't get you. Can you repeat, please?"
