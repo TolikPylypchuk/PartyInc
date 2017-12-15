@@ -4,7 +4,7 @@ open System
 
 open PartyInc.Core
 
-let manageResponse (response: Response) = async {
+let manageResponse response = async {
     match response.TopScoringIntent.Intent with
     | "order.all.price"
     | "order.cake"
