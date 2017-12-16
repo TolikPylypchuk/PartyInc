@@ -72,6 +72,7 @@
     <Compile Include="Domain.fs" />
     <Compile Include="Parsers.fs" />
     <Compile Include="FoodParsers.fs" />
+    <Compile Include="PrologFood.fs" />
     <Compile Include="Luis.fs" />
     <Compile Include="BotStates.fs" />
     <Compile Include="Bot.fs" />
