@@ -26,12 +26,15 @@ namespace PartyInc
 				PrologInterop.GetSolutions(
 					prolog,
 					"Data\\food.pl",
-					"getCandyByPriceMoreEqualThan(50, candy(Name, Price))"));
+					"getCakeByPriceMoreEqualThan(50, cake(Name, Ingredients, Price))"));
 
 			switch (result)
 			{
 				case Result<FSharpList<Solution>, string>.Ok ok:
-					var solutions = SeqModule.OfList(ok.Item1);
+					var solutions = ListModule.ToSeq(ok.Item1);
+
+					this.AddLine("Variables:");
+					this.AddLine();
 
 					foreach (var solution in solutions)
 					{
@@ -44,7 +47,10 @@ namespace PartyInc
 					}
 					break;
 				case Result<FSharpList<Solution>, string>.Bad bad:
-					var errors = SeqModule.OfList(bad.Item);
+					var errors = ListModule.ToSeq(bad.Item);
+
+					this.AddLine("Errors:");
+					this.AddLine();
 
 					foreach (string error in errors)
 					{

@@ -4,15 +4,14 @@ open Chessie.ErrorHandling
 open Prolog
 
 [<CompiledName("GetSolutions")>]
-let getSolutions (prolog : PrologEngine) file query =
-    async {
-        let solutions = prolog.GetAllSolutions(file, query)
+let getSolutions (prolog : PrologEngine) file query = async {
+    let solutions = prolog.GetAllSolutions(file, query)
 
-        return 
-            if solutions.Success
-            then solutions.NextSolution |> Seq.toList |> ok
-            else solutions.ErrMsg |> fail
-    }
+    return 
+        if not solutions.HasError
+        then solutions.NextSolution |> Seq.toList |> ok
+        else solutions.ErrMsg |> fail
+}
 
 [<CompiledName("GetVariables")>]
 let getVariables (solution : Solution) =
