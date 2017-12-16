@@ -24,7 +24,7 @@ cookie("Americano", 44.5).
 
 cookie("Strawberry Kifli", 56.0).
 
-cookie("Chacolate Kifli", 64.2).
+cookie("Chocolate Kifli", 64.2).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -64,14 +64,14 @@ getCakeByIngredientsInclude(
 	cake(Name, Ingredients, Price),
 	member(IngredientInclude, IngredientsInclude),
 	member(IngredientInclude, Ingredients).
-  
+
 getCakeByIngredientsExclude(
 		IngredientsExclude,
 		cake(Name, Ingredients, Price)) :-
-	cake(Name, Ingredients, Price),
-	member(IngredientExclude, IngredientsExclude),
-	not(member(IngredientExclude, Ingredients)).
- 
+    cake(Name, Ingredients, Price),
+    member(IngredientExclude, IngredientsExclude),
+    not(member(IngredientExclude, Ingredients)).
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %rules(cookie, price)

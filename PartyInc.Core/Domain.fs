@@ -8,16 +8,20 @@ type Cake = {
     Price: decimal
 }
 
-type Sweet = {
+type SweetInfo = {
     Name: string
-    Weight: float
     Price: decimal
+    Weight: decimal
 }
+
+type Cookie = Cookie of SweetInfo
+
+type Candy = Candy of SweetInfo
 
 type Food = {
     Cake: Cake
-    Cookies: Sweet list
-    Candies: Sweet list
+    Cookies: Cookie list
+    Candies: Candy list
 }
 
 type Drink = {
