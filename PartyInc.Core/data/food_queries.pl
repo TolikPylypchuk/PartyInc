@@ -1,4 +1,4 @@
-﻿getCandyByPriceMoreEqualThan(50, candy(Name, Price)).
+getCandyByPriceMoreEqualThan(50, candy(Name, Price)).
 getCandyByPriceLessThan(50, candy(Name, Price)).
 getCookieByPriceMoreEqualThan(50, cookie(Name, Price)).
 getCookieByPriceLessThan(50, cookie(Name, Price)).
