@@ -8,8 +8,8 @@ let pStringInQuotes : Parser<string> = pstring "\"" >>. charsTillString "\"" tru
 
 let pStringInSpaces str = pstring str |> between spaces spaces
 
-let pInParens pInner = pStringInSpaces "(" >>. pInner .>> pStringInSpaces ")"
+let pPredicate name pInner =
+    pstring name >>. pStringInSpaces "(" >>. pInner .>> pStringInSpaces ")"
 
-let pInBrackets pInner = pStringInSpaces "[" >>. pInner .>> pStringInSpaces "]"
-
-let pPredicate name pInner = pstring name >>. pInParens pInner
+let pList pItem =
+    pStringInSpaces "[" >>. sepBy pItem (pStringInSpaces ",") .>> pStringInSpaces "]"

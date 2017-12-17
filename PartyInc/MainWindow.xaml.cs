@@ -26,7 +26,7 @@ namespace PartyInc
 				PrologInterop.GetSolutions(
 					prolog,
 					"Data\\food.pl",
-					"getCookieByPriceMoreEqualThan(50, cookie(Name, Price))"));
+					"getCakeByPriceMoreEqualThan(50, cake(Name, Ingredients, Price))"));
 
 			switch (result)
 			{
@@ -35,9 +35,9 @@ namespace PartyInc
 					
 					foreach (var solution in solutions)
 					{
-						var candyResult = PrologFood.GetCookie(solution);
+						var cakeResult = PrologFood.GetCake(solution);
 
-						this.AddLine(candyResult.ToString());
+						this.AddLine(cakeResult.ToString());
 						this.AddLine();
 					}
 					break;

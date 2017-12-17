@@ -40,3 +40,28 @@ let getCookie prologSolution =
             |> fail
         else
             sprintf "cookie(%s, %s)" nameVar.Value priceVar.Value |> parseCookie
+
+                
+[<CompiledName("GetCake")>]
+let getCake prologSolution =
+    let variables =
+        getVariables prologSolution
+        |> List.sortBy (fun var -> var.Name)
+        |> List.toArray
+    
+    if variables.Length <> 3 then
+        sprintf "Expected 3 variables, got %i" variables.Length |> fail
+    else
+        let ingredientsVar = variables.[0]
+        let nameVar = variables.[1]
+        let priceVar = variables.[2]
+        if not (ingredientsVar.Name = "Ingredients" && nameVar.Name = "Name" &&
+                priceVar.Name = "Price") then
+            sprintf "Expected Ingredients, Name and Price, got %s, %s, and %s"
+                    ingredientsVar.Name
+                    nameVar.Name
+                    priceVar.Name
+            |> fail
+        else
+            sprintf "cake(%s, %s, %s)" nameVar.Value ingredientsVar.Value priceVar.Value
+            |> parseCake
