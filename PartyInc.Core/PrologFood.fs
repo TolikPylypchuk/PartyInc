@@ -11,7 +11,6 @@ let getCandy prologSolution =
         prologSolution
         |> getVariables
         |> List.sortBy (fun var -> var.Name)
-        |> List.toArray
     
     if variables.Length <> 2 then
         sprintf "Expected 2 variables, got %i" variables.Length |> fail
@@ -24,14 +23,13 @@ let getCandy prologSolution =
             |> fail
         else
             sprintf "candy(%s, %s)" nameVar.Value priceVar.Value |> parseCandy
-            
+
 [<CompiledName("GetCookie")>]
 let getCookie prologSolution =
     let variables =
         prologSolution
         |> getVariables
         |> List.sortBy (fun var -> var.Name)
-        |> List.toArray
     
     if variables.Length <> 2 then
         sprintf "Expected 2 variables, got %i" variables.Length |> fail
@@ -45,14 +43,12 @@ let getCookie prologSolution =
         else
             sprintf "cookie(%s, %s)" nameVar.Value priceVar.Value |> parseCookie
 
-                
 [<CompiledName("GetCake")>]
 let getCake prologSolution =
     let variables =
         prologSolution
         |> getVariables
         |> List.sortBy (fun var -> var.Name)
-        |> List.toArray
     
     if variables.Length <> 3 then
         sprintf "Expected 3 variables, got %i" variables.Length |> fail
