@@ -65,6 +65,12 @@
     <None Include="Data\food.pl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Responses\PartyOrganizer.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Responses\SweetsOrderConsultant.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="ChessieExtensions.fs" />
     <Compile Include="OptionConverter.fs" />
@@ -82,12 +88,6 @@
     <Compile Include="SweetsOrderConsultant.fs" />
     <Compile Include="API.fs" />
     <Content Include="packages.config" />
-    <None Include="Responses\PartyOrganizer.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Responses\SweetsOrderConsultant.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Chessie">
