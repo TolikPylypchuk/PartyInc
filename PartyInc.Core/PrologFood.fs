@@ -8,7 +8,8 @@ open PrologInterop
 [<CompiledName("GetCandy")>]
 let getCandy prologSolution =
     let variables =
-        getVariables prologSolution
+        prologSolution
+        |> getVariables
         |> List.sortBy (fun var -> var.Name)
         |> List.toArray
     
@@ -17,6 +18,7 @@ let getCandy prologSolution =
     else
         let nameVar = variables.[0]
         let priceVar = variables.[1]
+
         if not (nameVar.Name = "Name" && priceVar.Name = "Price") then
             sprintf "Expected Name and Price, got %s and %s" nameVar.Name priceVar.Name
             |> fail
@@ -26,7 +28,8 @@ let getCandy prologSolution =
 [<CompiledName("GetCookie")>]
 let getCookie prologSolution =
     let variables =
-        getVariables prologSolution
+        prologSolution
+        |> getVariables
         |> List.sortBy (fun var -> var.Name)
         |> List.toArray
     
@@ -35,6 +38,7 @@ let getCookie prologSolution =
     else
         let nameVar = variables.[0]
         let priceVar = variables.[1]
+
         if not (nameVar.Name = "Name" && priceVar.Name = "Price") then
             sprintf "Expected Name and Price, got %s and %s" nameVar.Name priceVar.Name
             |> fail
@@ -45,7 +49,8 @@ let getCookie prologSolution =
 [<CompiledName("GetCake")>]
 let getCake prologSolution =
     let variables =
-        getVariables prologSolution
+        prologSolution
+        |> getVariables
         |> List.sortBy (fun var -> var.Name)
         |> List.toArray
     
@@ -55,6 +60,7 @@ let getCake prologSolution =
         let ingredientsVar = variables.[0]
         let nameVar = variables.[1]
         let priceVar = variables.[2]
+
         if not (ingredientsVar.Name = "Ingredients" && nameVar.Name = "Name" &&
                 priceVar.Name = "Price") then
             sprintf "Expected Ingredients, Name and Price, got %s, %s, and %s"
