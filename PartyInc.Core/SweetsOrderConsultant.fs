@@ -2,12 +2,15 @@
 
 open System
 
+open Chessie.ErrorHandling
+
 open PartyInc.Core
 open PartyInc.Core.BotStates
 
-[<CompiledName("ManageResponse")>]
-let manageResponse (response: Response) =
-    match response.TopScoringIntent.Intent with
+[<CompiledName("HandleResponse")>]
+let handleResponse (response : Response) =
+    let intent = response.TopScoringIntent.Intent
+    match intent with
     | "order.all.price"
     | "order.cake"
     | "order.cake.preferences-no" 
@@ -21,8 +24,11 @@ let manageResponse (response: Response) =
     | "order.sweets.specify"
     | "order.sweets.weight"
     | "welcome" ->
-        let responseChoices =
-            ResponseChoices.sweetsOrderConsultant.[response.TopScoringIntent.Intent]
-        responseChoices.[Random().Next(0,responseChoices.Length)]
-    | _ -> 
-        "Sorry. I didn't get you. Can you repeat, please?"
+        ResponseChoices.sweetsOrderConsultant
+        |> Trial.lift (fun choices ->
+            choices
+            |> Map.find intent
+            |> List.map (fun list -> list.[Random().Next(list.Length)])
+            |> List.reduce (sprintf "%s %s"))
+    | _ ->
+        "Sorry. I didn't get you. Can you repeat, please?" |> ok

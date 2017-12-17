@@ -1,7 +1,10 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 using PartyInc.Core;
 using PartyInc.Properties;
+
+using static PartyInc.Core.API;
 
 namespace PartyInc
 {
@@ -20,17 +23,27 @@ namespace PartyInc
 			var botInfo = new BotInfo(
 				Settings.Default.PartyOrganizerId,
 				Settings.Default.PartyOrganizerSubscriptionKey,
-				PartyOrganizer.ManageResponse);
+				PartyOrganizer.HandleResponse);
 
-			const string hi = "hi";
+			try
+			{
+				const string hi = "hi";
 
-			this.AddLine(me, hi);
-			this.AddLine(bot, await Bot.RespondAsync(botInfo, hi));
-			
-			const string organize = "I want to organize a party";
+				this.AddLine(me, hi);
+				this.AddLine(bot, await GetAsyncResult(Bot.RespondAsync(botInfo, hi)));
 
-			this.AddLine(me, organize);
-			this.AddLine(bot, await Bot.RespondAsync(botInfo, organize));
+				const string organize = "I want to organize a party";
+
+				this.AddLine(me, organize);
+				this.AddLine(bot, await GetAsyncResult(Bot.RespondAsync(botInfo, organize)));
+			} catch (Exception exp)
+			{
+				MessageBox.Show(
+					exp.Message,
+					"Error",
+					MessageBoxButton.OK,
+					MessageBoxImage.Error);
+			}
 		}
 
 		private void AddLine(string party, string text = "")

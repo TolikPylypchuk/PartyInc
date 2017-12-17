@@ -1,5 +1,7 @@
 ﻿namespace PartyInc.Core
 
+open Chessie.ErrorHandling
+
 open PartyInc.Core
 open PartyInc.Core.BotStates
 open PartyInc.Core.Luis
@@ -18,7 +20,7 @@ module Bot =
     let respondAsync bot query =
         async {
             let! responseJson = requestAsync bot.Id bot.SubscriptionKey query
-            let response = responseJson |> parseResponse
-            return bot.Respond.Invoke(response)
+            return
+                responseJson
+                >>= (parseResponse >> Trial.lift bot.Respond.Invoke)
         }
-        |> Async.StartAsTask

@@ -1,0 +1,156 @@
+{
+	"order.all.price": [
+		[
+			"Okay.",
+			"All right.",
+			"Good that."
+		],
+		[
+			"Then we can suggest you the following to order:",
+			"Then the following cakes will suit you:",
+			"Taking into account what you have said, there are some suitable variants. Here is the list:"
+		],
+		[
+			"{candies|cookies|cakes}"
+		]
+	],
+	"order.cake": [
+		[
+			"Of course.",
+			"Okay.",
+			"Sure"
+		],
+		[
+			"Do you have any ingredients preferences?",
+			"Are there ingredients you can't stand? Or, on the contrary, like the most?",
+			"Any ingredients preferences?"
+		],
+		[
+			"What about price?",
+			"Do you want also to specify price?",
+			"Or maybe a price range?"
+		]
+	],
+	"order.cake.preferences-no": [
+		[
+			"Good that."
+		],
+		[
+			"Then any cakes will suit you. We have these:"
+		],
+		[
+			"{cakes}"
+		]
+	],
+	"order.cake.preferences-yes": [
+		[
+			"Then tell me, please, what ingredients do you like the most? Or which ones you hate?",
+			"What ingredients would you prefer to be and not to be in a receipe?",
+			"Okay then. What ingredients are your favourite? What you can't stand?"
+		],
+		[
+			"Maybe you are allergic to anything?",
+			"Are you allergic to anything?",
+			"Do you have an allergy?"
+		]
+	],
+	"order.cake.preferences-yes-dislikes": [
+		[
+			"Good.",
+			"Okay, I got you.",
+			"Sure."
+		],
+		[
+			"Is that all preferences you wanted to mention?",
+			"That's it?"
+		],
+		[
+			"If yes, what about the price?",
+			"In this case, what's the price range?",
+			"Do you want also to specify the price?"
+		]
+	],
+	"order.cake.preferences-yes-likes": [
+		[
+			"Okay.",
+			"We can do that.",
+			"Nice."
+		],
+		[
+			"Nice choice.",
+			"Great ingredient choice.",
+			"I like that myself, you know."
+		],
+		[
+			"Is it all preferences you want to mention?",
+			"Maybe, there are some other  ingredient preferences you want to mention?",
+			"That's it?"
+		],
+		[
+			"If so, what about the price?",
+			"If not, do you want also to specify the price?",
+			"Then what's the price range?"
+		]
+	],
+	"order.cake.preferences-yes-misunderstanding": [
+		[
+			"Sorry, what exactly do you mean?"
+		],
+		[
+			"These ingridients: {indredients}, do you like or dislike them? Or are you allergic to them?"
+		]
+	],
+	"order.cake.specify": [
+		[
+			"Good that."
+		],
+		[
+			"Do you want to order anything else?"
+		]
+	],
+	"order.stop": [
+		[
+			"Thank you for your order. Have a nice day!"
+		]
+	],
+	"order.sweets": [
+		[
+			"Of course.",
+			"Okay.",
+			"Sure."
+		],
+		[
+			"What about price per kilogram?",
+			"Do you want also to specify price per kilogram?",
+			"What's the price per kilogram range?"
+		]
+	],
+	"order.sweets.specify": [
+		[
+			"Good that."
+		],
+		[
+			"How much do you want?"
+		]
+	],
+	"order.sweets.weight": [
+		[
+			"Good that."
+		],
+		[
+			"Do you want to order anything else?"
+		]
+	],
+	"welcome": [
+		[
+			"Good day!",
+			"Hello!",
+			"Greetings!"
+		],
+		[
+			"You are looking for some tasties, don't do?",
+			"How can I help you?",
+			"What do you want to order?"
+		]
+	]
+}

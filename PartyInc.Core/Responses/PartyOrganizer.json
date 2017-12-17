@@ -1,0 +1,20 @@
+{
+	"welcome": [
+		[
+			"Hi!",
+			"Hey there!"
+		],
+		[
+			"How can I help you?"
+		]
+	],
+	"start": [
+		[
+			"Awesome!",
+			"Nice!"
+		],
+		[
+			"I don't know what to do next though."
+		]
+	]
+}

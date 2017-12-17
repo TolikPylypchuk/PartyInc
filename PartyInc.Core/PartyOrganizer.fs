@@ -1,7 +1,7 @@
 ﻿module PartyInc.Core.PartyOrganizer
 
-[<CompiledName("ManageResponse")>]
-let manageResponse (response : Response) =
+[<CompiledName("HandleResponse")>]
+let handleResponse (response : Response) =
     match response.TopScoringIntent.Intent with
     | "welcome" ->
         "Hi there!"
