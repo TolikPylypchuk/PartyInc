@@ -8,5 +8,11 @@
     <Setting Name="SweetsOrderConsultantSubscriptionKey" Type="System.String" Scope="User">
       <Value Profile="(Default)">efbef2bd3bf642d2a371e49127091535</Value>
     </Setting>
+    <Setting Name="PartyOrganizerId" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c5a93c2e-c6be-4c80-997c-29453e8599e8</Value>
+    </Setting>
+    <Setting Name="PartyOrganizerSubscriptionKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">03df50f3cde84da9a799ae6516dfc21e</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

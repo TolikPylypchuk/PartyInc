@@ -1,13 +1,7 @@
 ﻿using System.Windows;
 
-using Microsoft.FSharp.Collections;
-
-using Chessie.ErrorHandling;
-using Prolog;
-
 using PartyInc.Core;
-
-using static PartyInc.Core.API;
+using PartyInc.Properties;
 
 namespace PartyInc
 {
@@ -20,44 +14,28 @@ namespace PartyInc
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			var prolog = new PrologEngine();
+			const string me = " me";
+			const string bot = "bot";
 
-			var result = await AsyncToTask(
-				PrologInterop.GetSolutions(
-					prolog,
-					"Data\\food.pl",
-					"getCakeByPriceMoreEqualThan(50, cake(Name, Ingredients, Price))"));
+			var botInfo = new BotInfo(
+				Settings.Default.PartyOrganizerId,
+				Settings.Default.PartyOrganizerSubscriptionKey,
+				PartyOrganizer.ManageResponse);
 
-			switch (result)
-			{
-				case Result<FSharpList<Solution>, string>.Ok ok:
-					var solutions = ListModule.ToSeq(ok.Item1);
-					
-					foreach (var solution in solutions)
-					{
-						var cakeResult = PrologFood.GetCake(solution);
+			const string hi = "hi";
 
-						this.AddLine(cakeResult.ToString());
-						this.AddLine();
-					}
-					break;
-				case Result<FSharpList<Solution>, string>.Bad bad:
-					var errors = ListModule.ToSeq(bad.Item);
+			this.AddLine(me, hi);
+			this.AddLine(bot, await Bot.RespondAsync(botInfo, hi));
+			
+			const string organize = "I want to organize a party";
 
-					this.AddLine("Errors:");
-					this.AddLine();
-
-					foreach (string error in errors)
-					{
-						this.AddLine(error);
-					}
-					break;
-			}
+			this.AddLine(me, organize);
+			this.AddLine(bot, await Bot.RespondAsync(botInfo, organize));
 		}
 
-		private void AddLine(string text = "")
+		private void AddLine(string party, string text = "")
 		{
-			this.test.Text += $"{text}\n";
+			this.test.Text += $"{party}: {text}\n";
 		}
     }
 }

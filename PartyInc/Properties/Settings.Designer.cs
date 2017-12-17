@@ -46,5 +46,29 @@ namespace PartyInc.Properties {
                 this["SweetsOrderConsultantSubscriptionKey"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("c5a93c2e-c6be-4c80-997c-29453e8599e8")]
+        public string PartyOrganizerId {
+            get {
+                return ((string)(this["PartyOrganizerId"]));
+            }
+            set {
+                this["PartyOrganizerId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("03df50f3cde84da9a799ae6516dfc21e")]
+        public string PartyOrganizerSubscriptionKey {
+            get {
+                return ((string)(this["PartyOrganizerSubscriptionKey"]));
+            }
+            set {
+                this["PartyOrganizerSubscriptionKey"] = value;
+            }
+        }
     }
 }
