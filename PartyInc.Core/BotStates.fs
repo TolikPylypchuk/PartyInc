@@ -1,12 +1,16 @@
 ﻿namespace PartyInc.Core
 
-module BotStates = 
+open System
 
-    type SweetsOrderConsultantState = {
-        OrderState: Food * Preferences
-        PreviousIntent: string
-    }
+type PartyOrganizerState =
+    | NotStarted
+    | SaidHi
+    | Started
+    | SpecifiedDateTime of DateTime
+with
+    static member Initial = NotStarted
 
-    type BotState =
-        | SweetsOrderConsultantState
-        //other bot states
+type SweetsOrderConsultantState = {
+    OrderState: Food * Preferences
+    PreviousIntent: string
+}

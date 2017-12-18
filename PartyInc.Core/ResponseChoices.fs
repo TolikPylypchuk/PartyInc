@@ -1,6 +1,7 @@
 ﻿[<RequireQualifiedAccess>]
 module PartyInc.Core.ResponseChoices
 
+open System
 open System.Collections.Generic
 open System.IO
 
@@ -18,3 +19,10 @@ let private getFromFile file =
 let partyOrganizer = getFromFile "Responses\\PartyOrganizer.json"
 
 let sweetsOrderConsultant = getFromFile "Responses\\SweetsOrderConsultant.json"
+
+let getResponse map intent =
+    map
+    |> Trial.lift
+        (Map.find intent
+        >> List.map (fun (list : string list) -> list.[Random().Next(list.Length)])
+        >> List.reduce (sprintf "%s %s"))

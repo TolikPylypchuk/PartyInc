@@ -5,16 +5,30 @@ open System
 open Chessie.ErrorHandling
 
 [<CompiledName("HandleResponse")>]
-let handleResponse (response : Response) =
-    let intent = response.TopScoringIntent.Intent
-    match intent with
-    | "welcome" 
-    | "start" ->
-        ResponseChoices.partyOrganizer
-        |> Trial.lift (fun choices ->
-            choices
-            |> Map.find intent
-            |> List.map (fun list -> list.[Random().Next(list.Length)])
-            |> List.reduce (sprintf "%s %s"))
+let handleResponse (response, state) =
+    let getResponse = ResponseChoices.getResponse ResponseChoices.partyOrganizer
+
+    match response.TopScoringIntent.Intent, state with
+    | "welcome" as intent, NotStarted ->
+        getResponse intent
+        |> Trial.lift (fun responseText -> responseText, SaidHi)
+    | "start" as intent, SaidHi ->
+        getResponse intent
+        |> Trial.lift (fun responseText -> responseText, Started)
+    | "input.date-time" as intent, Started ->
+        getResponse intent
+        >>= (fun responseText ->
+            let dateTimeText =
+                response.Entities
+                |> List.tryFind (fun entity ->
+                    entity.Type = "builtin.datetimeV2.date" ||
+                    entity.Type = "builtin.datetimeV2.datetime")
+                |> Trial.failIfNone "Could not find the date entity"
+                |> Trial.lift (fun entity -> entity.Entity)
+
+            dateTimeText
+            |> Trial.lift DateTime.Parse
+            |> Trial.lift (fun dateTime -> responseText, SpecifiedDateTime dateTime))
     | _ ->
-        "Sorry. I didn't get you. Can you repeat, please?" |> ok
+        getResponse "None"
+        |> Trial.lift (fun response -> response, state)

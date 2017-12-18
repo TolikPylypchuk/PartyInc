@@ -88,8 +88,8 @@
     <Compile Include="BotStates.fs" />
     <Compile Include="Bot.fs" />
     <Compile Include="ResponseChoices.fs" />
-    <Compile Include="SweetsOrderConsultant.fs" />
     <Compile Include="PartyOrganizer.fs" />
+    <Compile Include="SweetsOrderConsultant.fs" />
     <Compile Include="PrologInterop.fs" />
     <Compile Include="PrologFood.fs" />
     <Content Include="packages.config" />

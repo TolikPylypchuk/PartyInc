@@ -11,17 +11,12 @@ type Intent = {
     Score: float
 }
 
-type Resolution = {
-    Values: string list
-}
-
 type Entity = {
     Entity: string
     Type: string
     StartIndex: int
     EndIndex: int
     Score: float option
-    Resolution: Resolution option
 }
 
 type Child = {

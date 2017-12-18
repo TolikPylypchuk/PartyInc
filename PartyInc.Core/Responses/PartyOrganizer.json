@@ -13,11 +13,27 @@
 			"Awesome!",
 			"Nice!"
 		],
-    [
-      "I don't know what to do next though."
-    ],
-    [
-      "I will connect you to backery then."
-    ]
-	]
+		[
+			"What's the date and time of the big event?"
+		]
+	],
+	"input.date-time": [
+		[
+			"Got it."
+		],
+		[
+			"This is where our adventure ends."
+		]
+	],
+	"None": [
+		[
+			"Sorry."
+		],
+		[
+			"Didn't get you."
+		],
+		[
+			"Can you repeat, please?"
+		]
+	] 
 }

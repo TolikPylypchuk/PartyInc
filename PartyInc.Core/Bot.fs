@@ -3,25 +3,26 @@
 open Chessie.ErrorHandling
 
 open PartyInc.Core
-open PartyInc.Core.BotStates
 open PartyInc.Core.Luis
 
-type ResponseHandler = delegate of Response -> Result<string, string>
+type ResponseHandler<'TState> =
+    delegate of Response * 'TState -> Result<string * 'TState, string> 
 
-type BotInfo = {
+type BotInfo<'TState> = {
     Id: string
     SubscriptionKey: string
-    Respond: ResponseHandler
+    Respond: ResponseHandler<'TState>
 }
 
 module Bot =
 
     [<CompiledName("RespondAsync")>]
-    let respondAsync bot query =
+    let respondAsync<'TState> bot (initialState : 'TState) query =
         async {
             let! responseJson = requestAsync bot.Id bot.SubscriptionKey query
             return
                 responseJson
                 >>= parseResponse
+                |> Trial.lift (fun response -> response, initialState)
                 >>= bot.Respond.Invoke
         }
