@@ -22,5 +22,6 @@ module Bot =
             let! responseJson = requestAsync bot.Id bot.SubscriptionKey query
             return
                 responseJson
-                >>= (parseResponse >> Trial.lift bot.Respond.Invoke)
+                >>= parseResponse
+                >>= bot.Respond.Invoke
         }
