@@ -59,34 +59,24 @@
     <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets'))" />
   </Target>
   <ItemGroup>
-    <None Include="Data\food_queries.pl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\food.pl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Responses\PartyOrganizer.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Responses\SweetsOrderConsultant.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <Compile Include="AssemblyInfo.fs" />
+    <None Include="Data\food.pl" />
+    <None Include="Data\food_queries.pl" />
     <Compile Include="ChessieExtensions.fs" />
+    <Compile Include="API.fs" />
+    <Compile Include="AssemblyInfo.fs" />
     <Compile Include="OptionConverter.fs" />
     <Compile Include="Json.fs" />
-    <Compile Include="PrologInterop.fs" />
-    <Compile Include="Domain.fs" />
     <Compile Include="Parsers.fs" />
+    <Compile Include="Domain.fs" />
     <Compile Include="FoodParsers.fs" />
-    <Compile Include="PrologFood.fs" />
     <Compile Include="Luis.fs" />
     <Compile Include="BotStates.fs" />
     <Compile Include="Bot.fs" />
     <Compile Include="ResponseChoices.fs" />
-    <Compile Include="PartyOrganizer.fs" />
     <Compile Include="SweetsOrderConsultant.fs" />
-    <Compile Include="API.fs" />
+    <Compile Include="PartyOrganizer.fs" />
+    <Compile Include="PrologInterop.fs" />
+    <Compile Include="PrologFood.fs" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -216,4 +206,11 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
 </Project>
