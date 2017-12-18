@@ -4,9 +4,6 @@ open System
 
 open Chessie.ErrorHandling
 
-open PartyInc.Core
-open PartyInc.Core.BotStates
-
 [<CompiledName("HandleResponse")>]
 let handleResponse (response : Response) =
     let intent = response.TopScoringIntent.Intent

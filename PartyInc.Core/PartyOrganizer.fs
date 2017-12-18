@@ -1,11 +1,20 @@
 ﻿module PartyInc.Core.PartyOrganizer
 
+open System
+
+open Chessie.ErrorHandling
+
 [<CompiledName("HandleResponse")>]
 let handleResponse (response : Response) =
-    match response.TopScoringIntent.Intent with
-    | "welcome" ->
-        "Hi there!"
+    let intent = response.TopScoringIntent.Intent
+    match intent with
+    | "welcome" 
     | "start" ->
-        "Awesome! I don't know what to do next, though."
+        ResponseChoices.partyOrganizer
+        |> Trial.lift (fun choices ->
+            choices
+            |> Map.find intent
+            |> List.map (fun list -> list.[Random().Next(list.Length)])
+            |> List.reduce (sprintf "%s %s"))
     | _ ->
-        "Sorry. I didn't get you. Can you repeat, please?"
+        "Sorry. I didn't get you. Can you repeat, please?" |> ok

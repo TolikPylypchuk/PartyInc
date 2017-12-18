@@ -61,6 +61,12 @@
   <ItemGroup>
     <None Include="Data\food.pl" />
     <None Include="Data\food_queries.pl" />
+    <None Include="Responses\SweetsOrderConsultant.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Responses\PartyOrganizer.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Compile Include="ChessieExtensions.fs" />
     <Compile Include="API.fs" />
     <Compile Include="AssemblyInfo.fs" />
