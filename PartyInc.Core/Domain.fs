@@ -33,9 +33,9 @@ type Drink = {
 }
 
 type Order = {
+    Name: string
     DateTime: DateTime
     Address: string
-    Type: string
     MinAge: int
     MaxAge: int
     Food: Food

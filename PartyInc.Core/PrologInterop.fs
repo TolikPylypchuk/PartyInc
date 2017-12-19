@@ -7,7 +7,7 @@ open Prolog
 let getSolutions (prolog : PrologEngine) file query = async {
     let solutions = prolog.GetAllSolutions(file, query)
 
-    return 
+    return
         if not solutions.HasError
         then solutions.NextSolution |> Seq.toList |> ok
         else solutions.ErrMsg |> fail

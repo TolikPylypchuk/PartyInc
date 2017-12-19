@@ -29,7 +29,7 @@
 			"Where's the party going to take place?"
 		],
 		[
-			"(Note that I'm going to take the next thing you say as the literal address.)"
+			"{literal address}"
 		]
 	],
 	"input.address": [
@@ -61,6 +61,15 @@
 	"input.age:max-age": [
 		[
 			"Got it."
+		],
+		[
+			"Do you also want to order sweets and drinks for the party?"
+		],
+		[
+			"{button food}"
+		],
+		[
+			"{button drinks}"
 		]
 	],
 	"input.age:incorrect-max-age": [

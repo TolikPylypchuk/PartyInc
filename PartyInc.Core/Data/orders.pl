@@ -1,0 +1,1 @@
+order("Tolik's Awesome Party", "2017-12-20T18:00:00", "Kyivska st. 21", 10, 20, cake("Funfetti cake", ["vanilla", "sugar"], 174.5), [ cookie("Americano", 44.5, 1.0) ], [ candy("Winny Cherries", 150.8, 4.0) ]).
