@@ -39,8 +39,12 @@ let handleResponse (response, state) =
             |> ResponseChoices.getResponseKey
             |> getResponse
             |> Trial.lift (fun response -> response, newState))
-    | "input.age", SpecifiedDateTime dateTime
-    | "input.age", IncorrectMinAge dateTime ->
+    | _, SpecifiedDateTime dateTime ->
+        getResponse "input.address"
+        |> Trial.lift (fun responseText ->
+            responseText, SpecifiedAddress(dateTime, response.Query))
+    | "input.age", SpecifiedAddress (dateTime, address)
+    | "input.age", IncorrectMinAge (dateTime, address) ->
         response.Entities
         |> List.tryFind (fun entity -> entity.Type = "builtin.number")
         |> Trial.failIfNone "Could not find the age or number entity"
@@ -52,15 +56,15 @@ let handleResponse (response, state) =
         >>= (fun age ->
             let newState =
                 if age > 0
-                then SpecifiedMinAge (dateTime, age)
-                else IncorrectMinAge dateTime
+                then SpecifiedMinAge (dateTime, address, age)
+                else IncorrectMinAge (dateTime, address)
 
             (intent, newState |> PartyOrganizerState.getName)
             |> ResponseChoices.getResponseKey
             |> getResponse
             |> Trial.lift (fun response -> response, newState))
-    | "input.age", SpecifiedMinAge (dateTime, minAge)
-    | "input.age", IncorrectMaxAge (dateTime, minAge) ->
+    | "input.age", SpecifiedMinAge (dateTime, address, minAge)
+    | "input.age", IncorrectMaxAge (dateTime, address, minAge) ->
         response.Entities
         |> List.tryFind (fun entity -> entity.Type = "builtin.number")
         |> Trial.failIfNone "Could not find the age or number entity"
@@ -72,8 +76,8 @@ let handleResponse (response, state) =
         >>= (fun maxAge ->
             let newState =
                 if maxAge >= minAge
-                then SpecifiedMaxAge (dateTime, minAge, maxAge)
-                else IncorrectMaxAge (dateTime, minAge)
+                then SpecifiedMaxAge (dateTime, address, minAge, maxAge)
+                else IncorrectMaxAge (dateTime, address, minAge)
 
             (intent, newState |> PartyOrganizerState.getName)
             |> ResponseChoices.getResponseKey

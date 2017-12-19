@@ -8,10 +8,11 @@ type PartyOrganizerState =
     | Started
     | SpecifiedDateTime of DateTime
     | IncorrectDateTime
-    | SpecifiedMinAge of DateTime * int
-    | IncorrectMinAge of DateTime
-    | SpecifiedMaxAge of DateTime * int * int
-    | IncorrectMaxAge of DateTime * int
+    | SpecifiedAddress of DateTime * string
+    | SpecifiedMinAge  of DateTime * string * int
+    | IncorrectMinAge  of DateTime * string
+    | SpecifiedMaxAge  of DateTime * string * int * int
+    | IncorrectMaxAge  of DateTime * string * int
 
 [<RequireQualifiedAccess>]
 module PartyOrganizerState =
@@ -26,6 +27,7 @@ module PartyOrganizerState =
         | Started -> "started"
         | SpecifiedDateTime _ -> "date-time"
         | IncorrectDateTime -> "incorrect-date-time"
+        | SpecifiedAddress _ -> "address"
         | SpecifiedMinAge _ -> "min-age"
         | IncorrectMinAge _ -> "incorrect-min-age"
         | SpecifiedMaxAge _ -> "max-age"

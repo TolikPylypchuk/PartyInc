@@ -48,6 +48,13 @@ namespace PartyInc
 					Bot.RespondAsync(botInfo, state, dateTime));
 				this.AddLine(bot, response);
 
+				const string address = "Kyivska st. 21";
+
+				this.AddLine(me, address);
+				(response, state) = await GetAsyncResult(
+					Bot.RespondAsync(botInfo, state, address));
+				this.AddLine(bot, response);
+
 				const string minAge = "5";
 
 				this.AddLine(me, minAge);

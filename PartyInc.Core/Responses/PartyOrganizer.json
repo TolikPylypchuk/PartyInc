@@ -25,6 +25,18 @@
 			"Got it."
 		],
 		[
+			"What's the address of the party?",
+			"Where's the party going to take place?"
+		],
+		[
+			"(Note that I'm going to take the next thing you say as the literal address.)"
+		]
+	],
+	"input.address": [
+		[
+			"OK."
+		],
+		[
 			"Please, specify the minimum age of the kids (in years)."
 		]
 	],
@@ -58,13 +70,16 @@
 	],
 	"None": [
 		[
-			"Sorry."
+			"Sorry.",
+			"Uh."
 		],
 		[
-			"Didn't get you."
+			"Didn't get you.",
+			"Didn't catch that."
 		],
 		[
-			"Can you repeat, please?"
+			"Can you repeat, please?",
+			"Can you say it again, please?"
 		]
 	]
 }
