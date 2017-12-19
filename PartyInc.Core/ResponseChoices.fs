@@ -26,3 +26,5 @@ let getResponse map intent =
         (Map.find intent
         >> List.map (fun (list : string list) -> list.[Random().Next(list.Length)])
         >> List.reduce (sprintf "%s %s"))
+
+let getResponseKey (intent, stateName) = sprintf "%s:%s" intent stateName

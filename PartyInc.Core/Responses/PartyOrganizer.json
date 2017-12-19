@@ -5,6 +5,9 @@
 			"Hey there!"
 		],
 		[
+			"Welcome to Party Inc!"
+		],
+		[
 			"How can I help you?"
 		]
 	],
@@ -17,12 +20,40 @@
 			"What's the date and time of the big event?"
 		]
 	],
-	"input.date-time": [
+	"input.date-time:date-time": [
 		[
 			"Got it."
 		],
 		[
-			"This is where our adventure ends."
+			"Please, specify the minimum age of the kids (in years)."
+		]
+	],
+	"input.date-time:incorrect-date-time": [
+		[
+			"You should specify a date and time in the future, not the past."
+		]
+	],
+	"input.age:min-age": [
+		[
+			"Great."
+		],
+		[
+			"What's the maximum age of the kids (in years)?"
+		]
+	],
+	"input.age:incorrect-min-age": [
+		[
+			"You should specify a valid age."
+		]
+	],
+	"input.age:max-age": [
+		[
+			"Got it."
+		]
+	],
+	"input.age:incorrect-max-age": [
+		[
+			"Maximum age should not be less than minimum age."
 		]
 	],
 	"None": [
@@ -35,5 +66,5 @@
 		[
 			"Can you repeat, please?"
 		]
-	] 
+	]
 }

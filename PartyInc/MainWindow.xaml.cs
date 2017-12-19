@@ -31,7 +31,7 @@ namespace PartyInc
 
 				this.AddLine(me, hi);
 				var (response, state) = await GetAsyncResult(
-					Bot.RespondAsync(botInfo, PartyOrganizerState.Initial, hi));
+					Bot.RespondAsync(botInfo, PartyOrganizerStateModule.Initial, hi));
 				this.AddLine(bot, response);
 
 				const string organize = "I want to organize a party";
@@ -44,8 +44,22 @@ namespace PartyInc
 				const string dateTime = "2017/12/20 18:00";
 
 				this.AddLine(me, dateTime);
-				(response, _) = await GetAsyncResult(
+				(response, state) = await GetAsyncResult(
 					Bot.RespondAsync(botInfo, state, dateTime));
+				this.AddLine(bot, response);
+
+				const string minAge = "5";
+
+				this.AddLine(me, minAge);
+				(response, state) = await GetAsyncResult(
+					Bot.RespondAsync(botInfo, state, minAge));
+				this.AddLine(bot, response);
+
+				const string maxAge = "9";
+
+				this.AddLine(me, maxAge);
+				(response, _) = await GetAsyncResult(
+					Bot.RespondAsync(botInfo, state, maxAge));
 				this.AddLine(bot, response);
 
 			} catch (Exception exp)

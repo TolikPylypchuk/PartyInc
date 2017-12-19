@@ -76,22 +76,23 @@
     <None Include="Responses\PartyOrganizer.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Compile Include="AssemblyInfo.fs" />
     <Compile Include="ChessieExtensions.fs" />
     <Compile Include="API.fs" />
-    <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="PrologInterop.fs" />
     <Compile Include="OptionConverter.fs" />
     <Compile Include="Json.fs" />
-    <Compile Include="Parsers.fs" />
     <Compile Include="Domain.fs" />
+    <Compile Include="Parsers.fs" />
     <Compile Include="FoodParsers.fs" />
+    <Compile Include="PrologFood.fs" />
     <Compile Include="Luis.fs" />
-    <Compile Include="BotStates.fs" />
-    <Compile Include="Bot.fs" />
+    <Compile Include="PartyOrganizerState.fs" />
+    <Compile Include="SweetsOrderConsultantState.fs" />
     <Compile Include="ResponseChoices.fs" />
     <Compile Include="PartyOrganizer.fs" />
     <Compile Include="SweetsOrderConsultant.fs" />
-    <Compile Include="PrologInterop.fs" />
-    <Compile Include="PrologFood.fs" />
+    <Compile Include="Bot.fs" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

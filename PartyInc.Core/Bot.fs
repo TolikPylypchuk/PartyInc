@@ -17,12 +17,12 @@ type BotInfo<'TState> = {
 module Bot =
 
     [<CompiledName("RespondAsync")>]
-    let respondAsync<'TState> bot (initialState : 'TState) query =
+    let respondAsync<'TState> bot (state : 'TState) query =
         async {
             let! responseJson = requestAsync bot.Id bot.SubscriptionKey query
             return
                 responseJson
                 >>= parseResponse
-                |> Trial.lift (fun response -> response, initialState)
+                |> Trial.lift (fun response -> response, state)
                 >>= bot.Respond.Invoke
         }
