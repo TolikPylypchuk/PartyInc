@@ -15,7 +15,10 @@
 			"Nice!"
 		],
 		[
-			"What's the date and time of the big event?"
+			"What's the name of the big event?"
+		],
+		[
+			"(Note that I will consider your message as a literal party name)"
 		]
 	],
 	"input.name": [
@@ -41,6 +44,11 @@
 			"(Note that I will consider your message as a literal address)"
 		]
 	],
+	"input.date-time:incorrect-date-time": [
+		[
+			"You should specify a date and time in the future, not the past."
+		]
+	],
 	"input.address": [
 		[
 			"Got it.",
@@ -48,11 +56,6 @@
 		],
 		[
 			"Please, specify the minimum age of the kids (in years)."
-		]
-	],
-	"input.date-time:incorrect-date-time": [
-		[
-			"You should specify a date and time in the future, not the past."
 		]
 	],
 	"input.age:min-age": [
