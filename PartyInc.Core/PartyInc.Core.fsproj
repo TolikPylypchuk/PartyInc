@@ -87,13 +87,16 @@
     <Compile Include="API.fs" />
     <Compile Include="PrologInterop.fs" />
     <Compile Include="OptionConverter.fs" />
-    <Compile Include="Json.fs" />
     <Compile Include="Domain.fs" />
     <Compile Include="Parsers.fs" />
     <Compile Include="FoodParsers.fs" />
     <Compile Include="OrderParsers.fs" />
     <Compile Include="PrologFood.fs" />
     <Compile Include="PrologOrder.fs" />
+    <Compile Include="LuisDomain.fs" />
+    <Compile Include="ResolutionConverter.fs" />
+    <Compile Include="ResolutionValuesConverter.fs" />
+    <Compile Include="Json.fs" />
     <Compile Include="Luis.fs" />
     <Compile Include="PartyOrganizerState.fs" />
     <Compile Include="SweetsOrderConsultantState.fs" />

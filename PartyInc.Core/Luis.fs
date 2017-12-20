@@ -6,38 +6,6 @@ open System
 open System.Net.Http
 open System.Web
 
-type Intent = {
-    Intent: string
-    Score: float
-}
-
-type Entity = {
-    Entity: string
-    Type: string
-    StartIndex: int
-    EndIndex: int
-    Score: float option
-}
-
-type Child = {
-    Type: string
-    Value: string
-}
-
-type CompositeEntity = {
-    ParentType: string
-    Value: string
-    Children: Child list
-}
-
-type Response = {
-    Query: string
-    TopScoringIntent: Intent
-    Intents: Intent list
-    Entities: Entity list
-    CompositeEntities: CompositeEntity list option
-}
-
 module Luis =
 
     let requestAsync luisAppId (subscriptionKey : string) query =
