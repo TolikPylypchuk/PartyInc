@@ -5,14 +5,12 @@
 			"Hey there!"
 		],
 		[
-			"Welcome to Party Inc!"
-		],
-		[
 			"How can I help you?"
 		]
 	],
 	"start": [
 		[
+			"Great!",
 			"Awesome!",
 			"Nice!"
 		],
@@ -20,20 +18,32 @@
 			"What's the date and time of the big event?"
 		]
 	],
+	"input.name": [
+		[
+			"Great!",
+			"Awesome!",
+			"Nice!"
+		],
+		[
+			"Please, specify the date and time of the party."
+		]
+	],
 	"input.date-time:date-time": [
 		[
-			"Got it."
+			"Got it.",
+			"OK."
 		],
 		[
 			"What's the address of the party?",
 			"Where's the party going to take place?"
 		],
 		[
-			"{literal address}"
+			"(Note that I will consider your message as a literal address)"
 		]
 	],
 	"input.address": [
 		[
+			"Got it.",
 			"OK."
 		],
 		[
@@ -47,7 +57,8 @@
 	],
 	"input.age:min-age": [
 		[
-			"Great."
+			"Got it.",
+			"OK."
 		],
 		[
 			"What's the maximum age of the kids (in years)?"
@@ -60,16 +71,11 @@
 	],
 	"input.age:max-age": [
 		[
-			"Got it."
+			"Got it.",
+			"OK."
 		],
 		[
-			"Do you also want to order sweets and drinks for the party?"
-		],
-		[
-			"{button food}"
-		],
-		[
-			"{button drinks}"
+			"Would you like to order some sweets for the party?"
 		]
 	],
 	"input.age:incorrect-max-age": [

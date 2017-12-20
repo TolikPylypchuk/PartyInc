@@ -13,12 +13,15 @@ let handleResponse (response, state) =
     match intent, state with
     | "welcome", NotStarted ->
         getResponse intent
-        |> Trial.lift (fun responseText -> responseText, SaidHi)
-    | "start", SaidHi ->
+        |> Trial.lift (fun responseText -> responseText, NotStarted)
+    | "start", NotStarted ->
         getResponse intent
         |> Trial.lift (fun responseText -> responseText, Started)
-    | "input.date-time", Started
-    | "input.date-time", IncorrectDateTime ->
+    | _, Started ->
+        getResponse "input.name"
+        |> Trial.lift (fun responseText -> responseText, SpecifiedName response.Query)
+    | "input.date-time", SpecifiedName name
+    | "input.date-time", IncorrectDateTime name ->
         response.Entities
         |> List.tryFind (fun entity ->
             entity.Type = "builtin.datetimeV2.date" ||
@@ -32,19 +35,19 @@ let handleResponse (response, state) =
         >>= (fun dateTime ->
             let newState =
                 if dateTime > DateTime.Now
-                then SpecifiedDateTime dateTime
-                else IncorrectDateTime
+                then SpecifiedDateTime (name, dateTime)
+                else IncorrectDateTime name
 
             (intent, newState |> PartyOrganizerState.getName)
             |> ResponseChoices.getResponseKey
             |> getResponse
             |> Trial.lift (fun response -> response, newState))
-    | _, SpecifiedDateTime dateTime ->
+    | _, SpecifiedDateTime (name, dateTime) ->
         getResponse "input.address"
         |> Trial.lift (fun responseText ->
-            responseText, SpecifiedAddress(dateTime, response.Query))
-    | "input.age", SpecifiedAddress (dateTime, address)
-    | "input.age", IncorrectMinAge (dateTime, address) ->
+            responseText, SpecifiedAddress (name, dateTime, response.Query))
+    | "input.age", SpecifiedAddress (name, dateTime, address)
+    | "input.age", IncorrectMinAge (name, dateTime, address) ->
         response.Entities
         |> List.tryFind (fun entity -> entity.Type = "builtin.number")
         |> Trial.failIfNone "Could not find the age or number entity"
@@ -56,15 +59,15 @@ let handleResponse (response, state) =
         >>= (fun age ->
             let newState =
                 if age > 0
-                then SpecifiedMinAge (dateTime, address, age)
-                else IncorrectMinAge (dateTime, address)
+                then SpecifiedMinAge (name, dateTime, address, age)
+                else IncorrectMinAge (name, dateTime, address)
 
             (intent, newState |> PartyOrganizerState.getName)
             |> ResponseChoices.getResponseKey
             |> getResponse
             |> Trial.lift (fun response -> response, newState))
-    | "input.age", SpecifiedMinAge (dateTime, address, minAge)
-    | "input.age", IncorrectMaxAge (dateTime, address, minAge) ->
+    | "input.age", SpecifiedMinAge (name, dateTime, address, minAge)
+    | "input.age", IncorrectMaxAge (name, dateTime, address, minAge) ->
         response.Entities
         |> List.tryFind (fun entity -> entity.Type = "builtin.number")
         |> Trial.failIfNone "Could not find the age or number entity"
@@ -76,8 +79,8 @@ let handleResponse (response, state) =
         >>= (fun maxAge ->
             let newState =
                 if maxAge >= minAge
-                then SpecifiedMaxAge (dateTime, address, minAge, maxAge)
-                else IncorrectMaxAge (dateTime, address, minAge)
+                then SpecifiedMaxAge (name, dateTime, address, minAge, maxAge)
+                else IncorrectMaxAge (name, dateTime, address, minAge)
 
             (intent, newState |> PartyOrganizerState.getName)
             |> ResponseChoices.getResponseKey

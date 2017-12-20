@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Windows;
 
-using Prolog;
-
 using PartyInc.Core;
 using PartyInc.Properties;
 
@@ -19,7 +17,6 @@ namespace PartyInc
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			const string pl = " pl";
 			const string me = " me";
 			const string bot = "bot";
 
@@ -30,21 +27,10 @@ namespace PartyInc
 
 			try
 			{
-				var prolog = new PrologEngine();
-
-				const string query =
-					"order(Name, DateTime, Address, MinAge, MaxAge, Cake, Cookies, Candies)";
-
-				var solutions = await GetAsyncResult(
-					PrologInterop.GetSolutions(
-						prolog,
-						"Data\\orders.pl",
-						query));
-
-				foreach (var solution in solutions)
-				{
-					this.AddLine(pl, PrologOrder.GetOrder(solution).ToString());
-				}
+				this.AddLine(
+					bot,
+					"Welcome to Party Inc! We'll help you organize " +
+					"a mind-blowing party for kids!");
 
 				const string hi = "hi";
 
@@ -58,6 +44,13 @@ namespace PartyInc
 				this.AddLine(me, organize);
 				(response, state) = await GetAsyncResult(
 					Bot.RespondAsync(botInfo, state, organize));
+				this.AddLine(bot, response);
+
+				const string name = "Tolik's Awesome party";
+
+				this.AddLine(me, name);
+				(response, state) = await GetAsyncResult(
+					Bot.RespondAsync(botInfo, state, name));
 				this.AddLine(bot, response);
 
 				const string dateTime = "2017/12/20 18:00";
