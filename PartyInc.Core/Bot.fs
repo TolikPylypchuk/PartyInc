@@ -3,7 +3,6 @@
 open Chessie.ErrorHandling
 
 open PartyInc.Core
-open PartyInc.Core.Luis
 
 type ResponseHandler<'TState> =
     delegate of Response * 'TState -> Result<string * 'TState, string> 
@@ -19,10 +18,10 @@ module Bot =
     [<CompiledName("RespondAsync")>]
     let respondAsync<'TState> bot (state : 'TState) query =
         async {
-            let! responseJson = requestAsync bot.Id bot.SubscriptionKey query
+            let! responseJson = Luis.requestAsync bot.Id bot.SubscriptionKey query
             return
                 responseJson
-                >>= parseResponse
+                >>= Luis.parseResponse
                 |> Trial.lift (fun response -> response, state)
                 >>= bot.Respond.Invoke
         }

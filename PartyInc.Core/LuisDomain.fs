@@ -9,9 +9,13 @@ type ResolutionValue = {
     Value: string
 }
 
-type ResolutionValues =
-    | Strings of string list
-    | Objects of ResolutionValue list
+type ResolutionValueUnion =
+    | StringValue of string
+    | ResolutionValue of ResolutionValue
+
+type ResolutionValues = {
+    Values: ResolutionValueUnion list
+}
 
 type Resolution =
     | Value of ResolutionValue

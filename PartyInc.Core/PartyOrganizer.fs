@@ -27,7 +27,10 @@ let handleResponse (response, state) =
             entity.Type = "builtin.datetimeV2.date" ||
             entity.Type = "builtin.datetimeV2.datetime")
         |> Trial.failIfNone "Could not find the date entity"
-        |> Trial.lift (fun entity -> entity.Entity |> DateTime.TryParse)
+        >>= Luis.getEntityResolutionValues
+        |> Trial.lift List.head
+        |> Trial.lift (fun resValue -> resValue.Value)
+        |> Trial.lift DateTime.TryParse
         >>= (fun (success, dateTime) ->
             if success
             then dateTime |> ok
@@ -51,7 +54,8 @@ let handleResponse (response, state) =
         response.Entities
         |> List.tryFind (fun entity -> entity.Type = "builtin.number")
         |> Trial.failIfNone "Could not find the age or number entity"
-        |> Trial.lift (fun entity -> entity.Entity |> Int32.TryParse)
+        >>= Luis.getEntityResolutionValue
+        |> Trial.lift Int32.TryParse
         >>= (fun (success, age) ->
             if success
             then age |> ok

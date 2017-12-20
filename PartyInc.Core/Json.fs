@@ -6,7 +6,7 @@ open Newtonsoft.Json
 open Newtonsoft.Json.Converters
 
 let private converters : JsonConverter[] =
-    [| OptionConverter(); ResolutionConverter(); ResolutionValuesConverter() |]
+    [| OptionConverter(); ResolutionConverter(); ResolutionValueUnionConverter() |]
 
 let serialize<'T> =
     Trial.catch <| fun value -> JsonConvert.SerializeObject(value, converters)

@@ -53,7 +53,7 @@ namespace PartyInc
 					Bot.RespondAsync(botInfo, state, name));
 				this.AddLine(bot, response);
 
-				const string dateTime = "2017/12/20 18:00";
+				const string dateTime = "next sunday at 18:00";
 
 				this.AddLine(me, dateTime);
 				(response, state) = await GetAsyncResult(
@@ -67,7 +67,7 @@ namespace PartyInc
 					Bot.RespondAsync(botInfo, state, address));
 				this.AddLine(bot, response);
 
-				const string minAge = "5";
+				const string minAge = "five";
 
 				this.AddLine(me, minAge);
 				(response, state) = await GetAsyncResult(

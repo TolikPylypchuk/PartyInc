@@ -6,6 +6,7 @@ open System
 open System.Net.Http
 open System.Web
 
+[<RequireQualifiedAccess>]
 module Luis =
 
     let requestAsync luisAppId (subscriptionKey : string) query =
@@ -42,3 +43,28 @@ module Luis =
     let parseResponse responseJson = 
         responseJson
         |> Json.deserialize<Response>
+
+    let getEntityResolutionValue entity =
+        match entity.Resolution with
+        | Value value -> value.Value |> ok
+        | Values _ -> "Cannot get entity value, because it contains multiple values" |> fail
+
+    let getEntityResolutionStrings entity =
+        match entity.Resolution with
+        | Value _ -> "Cannot get entity values, because it contains a single value" |> fail
+        | Values values ->
+            values.Values
+            |> List.map (function
+                | StringValue value -> value |> ok
+                | ResolutionValue _ -> "One of the values is not a string" |> fail)
+            |> Trial.sequence
+
+    let getEntityResolutionValues entity =
+        match entity.Resolution with
+        | Value _ -> "Cannot get entity values, because it contains a single value" |> fail
+        | Values values ->
+            values.Values
+            |> List.map (function
+                | ResolutionValue value -> value |> ok
+                | StringValue _ -> "One of the values is not a resolution value" |> fail)
+            |> Trial.sequence
