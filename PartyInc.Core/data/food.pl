@@ -16,18 +16,6 @@ cake("Fruitty",
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%facts(cookies)
-
-%cookie(cookie name, price for 1 kl)
-
-cookie("Americano", 44.5).
-
-cookie("Strawberry Kifli", 56.0).
-
-cookie("Chocolate Kifli", 64.2).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %facts(candies)
 
 %candy(candy name, price for 1 kl)
@@ -37,6 +25,18 @@ candy("Winny Cherries", 150.8).
 candy("Golden Nuts", 89.0).
 
 candy("Snickers", 95.8).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%facts(cookies)
+
+%cookie(cookie name, price for 1 kl)
+
+cookie("Americano", 44.5).
+
+cookie("Strawberry Kifli", 56.0).
+
+cookie("Chocolate Kifli", 64.2).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -74,6 +74,40 @@ getCakeByIngredientsExclude(
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%rules(cake, name)
+
+getCakeByName(
+		Name,
+		cake(Name, Ingredients, Price)) :-
+	cake(Name, Ingredients, Price).
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%rules(candy, name)
+
+getCandyByName(
+		Name,
+		candy(Name, Price)) :-
+	candy(Name, Price).
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%rules(candy, price)
+
+getCandyByPriceLessThan(
+		MaxPrice,
+		candy(Name, Price)) :-
+	candy(Name, Price),
+	Price < MaxPrice.
+
+getCandyByPriceMoreEqualThan(
+		MinPrice,
+		candy(Name, Price)) :-
+	candy(Name, Price),
+	MinPrice =< Price.
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %rules(cookie, price)
 
 getCookieByPriceLessThan(
@@ -90,16 +124,10 @@ getCookieByPriceMoreEqualThan(
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%rules(candy, price)
+%rules(cookie, name)
 
-getCandyByPriceLessThan(
-		MaxPrice,
-		candy(Name, Price)) :-
-	candy(Name, Price),
-	Price < MaxPrice.
-
-getCandyByPriceMoreEqualThan(
-		MinPrice,
-		candy(Name, Price)) :-
-	candy(Name, Price),
-	MinPrice =< Price.
+getCookieByName(
+		Name,
+		cookie(Name, Price)) :-
+	cookie(Name, Price).
+	
