@@ -1,31 +1,34 @@
 ﻿module PartyInc.Core.SweetsOrderConsultant
 
-open System
-
 open Chessie.ErrorHandling
 
 [<CompiledName("HandleResponse")>]
-let handleResponse (response : Response) =
+let handleResponse (response, state) =
+    let getResponse = ResponseChoices.getResponse ResponseChoices.sweetsOrderConsultant
+
     let intent = response.TopScoringIntent.Intent
-    match intent with
-    | "order.all.price"
-    | "order.cake"
-    | "order.cake.preferences-no" 
-    | "order.cake.preferences-yes"
-    | "order.cake.preferences-yes-dislikes"
-    | "order.cake.preferences-yes-likes"
-    | "order.cake.preferences-yes-misunderstanding"
-    | "order.cake.specify"
-    | "order.stop"
-    | "order.sweets"
-    | "order.sweets.specify"
-    | "order.sweets.weight"
-    | "welcome" ->
-        ResponseChoices.sweetsOrderConsultant
-        |> Trial.lift (fun choices ->
-            choices
-            |> Map.find intent
-            |> List.map (fun list -> list.[Random().Next(list.Length)])
-            |> List.reduce (sprintf "%s %s"))
+
+    match intent, state with
+    | "order.all.price", StartedCakeSpecifiedPrice (order, price) -> fail ""
+    | "order.all.price", StartedCakeFinishedPreferencesSpecifiedPrice (order, preferences, price) -> fail ""
+    | "order.all.price", StartedCandySpecifiedPrice (order, decimal)
+    | "order.all.price", StartedCookieSpecifiedPrice (order, decimal) -> fail ""
+    | "order.cake", SweetsEmptyOrder -> fail ""
+    | "order.cake.preferences-no", StartedCake order -> fail ""
+    | "order.cake.preferences-yes", StartedCake order -> fail ""
+    | "order.cake.preferences-yes-dislikes", StartedCakeStartedPreferences (order, preferences)
+    | "order.cake.preferences-yes-likes", StartedCakeStartedPreferences (order, preferences) -> fail ""
+    | "order.cake.preferences-yes-misunderstanding", StartedCakeStartedPreferences (order, preferences) -> fail ""
+    | "order.cake.specify", StartedCakeSpecifiedPrice (order, price) -> fail ""
+    | "order.cake.specify", StartedCakeFinishedPreferencesSpecifiedPrice (order, preferences, price) -> fail ""
+    | "order.stop", SpecifiedCake (order, name)
+    | "order.stop", SpecifiedCandy (order, name)
+    | "order.stop", SpecifiedCookie (order, name) -> fail ""
+    | "order.sweets", SweetsEmptyOrder -> fail ""
+    | "order.sweets.specify", StartedCandySpecifiedPriceAndWeight (order, price, weight)
+    | "order.sweets.specify", StartedCookieSpecifiedPriceAndWeight (order, price, weight) -> fail ""
+    | "order.sweets.weight", StartedCandySpecifiedPrice (order, price)
+    | "order.sweets.weight", StartedCookieSpecifiedPrice (order, price) -> fail ""
     | _ ->
-        "Sorry. I didn't get you. Can you repeat, please?" |> ok
+        getResponse "None"
+        |> Trial.lift (fun response -> response, state)
