@@ -12,7 +12,7 @@ namespace PartyInc.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.5.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.3.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -68,6 +68,30 @@ namespace PartyInc.Properties {
             }
             set {
                 this["PartyOrganizerSubscriptionKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("d2c55d8d-6774-407a-925b-22c4769daeff")]
+        public string DrinksOrderConsultantId {
+            get {
+                return ((string)(this["DrinksOrderConsultantId"]));
+            }
+            set {
+                this["DrinksOrderConsultantId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5f2333f63aa34e96a9a6cd72ead5ff61")]
+        public string DrinksOrderConsultantSubscriptionKey {
+            get {
+                return ((string)(this["DrinksOrderConsultantSubscriptionKey"]));
+            }
+            set {
+                this["DrinksOrderConsultantSubscriptionKey"] = value;
             }
         }
     }
