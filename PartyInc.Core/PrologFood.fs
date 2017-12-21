@@ -1,6 +1,7 @@
 ﻿module PartyInc.Core.PrologFood
 
 open Chessie.ErrorHandling
+open Prolog
 
 open FoodParsers
 open PrologInterop
@@ -67,3 +68,58 @@ let getCake prologSolution =
         else
             sprintf "cake(%s, %s, %s)" nameVar.Value ingredientsVar.Value priceVar.Value
             |> parseCake
+
+let getByQuery getter query = async {
+    let prolog = PrologEngine()
+
+    let! solutions =
+        getSolutions prolog "Data\\food.pl" query
+
+    return trial {
+        let! solutions = solutions
+
+        return!
+            solutions
+            |> List.map getter
+            |> Trial.sequence
+    }
+}
+
+let formatIngredients ingredients =
+    let rec formatIngredientsInner ingredients =
+        match ingredients with
+        | [] -> ""
+        | [ ingredient ] -> sprintf "%s " ingredient
+        | head :: tail -> sprintf "%s, %s" head (tail |> formatIngredientsInner)
+
+    sprintf "[ %s ]" (ingredients |> formatIngredientsInner)
+
+let getCandiesByQuery = getByQuery getCandy
+let getCookiesByQuery = getByQuery getCookie
+let getCakesByQuery = getByQuery getCake
+
+let getCandiesByPriceMoreEqualThan price =
+    getCandiesByQuery (sprintf "getCandyByPriceMoreEqualThan(%i, candy(Name, Price))" price)
+    
+let getCandiesByPriceLessThan price =
+    getCandiesByQuery (sprintf "getCandyByPriceLessThan(%i, candy(Name, Price))" price)
+
+let getCookiesByPriceMoreEqualThan price =
+    getCookiesByQuery (sprintf "getCookieByPriceMoreEqualThan(%i, cookie(Name, Price))" price)
+
+let getCookiesByPriceLessThan price =
+    getCookiesByQuery (sprintf "getCookieByPriceLessThan(%i, cookie(Name, Price))" price)
+    
+let getCakesByPriceMoreEqualThan price =
+    getCakesByQuery (sprintf "getCakeByPriceMoreEqualThan(%i, cake(Name, Ingredients, Price))" price)
+  
+let getCakesByPriceLessThan price =
+    getCakesByQuery (sprintf "getCakeByPriceLessThan(%i, cake(Name, Ingredients, Price))" price)
+
+let getCakesByIngredientsInclude ingredients =
+    let format = ingredients |> formatIngredients
+    getCakesByQuery (sprintf "getCakeByIngredientsInclude(%s, cake(Name, Ingredients, Price))" format)
+
+let getCakesByIngredientsExclude ingredients =
+    let format = ingredients |> formatIngredients
+    getCakesByQuery (sprintf "getCakeByIngredientsExclude(%s, cake(Name, Ingredients, Price))" format)
