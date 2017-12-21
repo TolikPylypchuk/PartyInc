@@ -1,9 +1,11 @@
 ﻿module PartyInc.Core.PrologOrder
 
+open System
+
 open Chessie.ErrorHandling
+open Prolog
 
 open PrologInterop
-
 open OrderParsers
 
 [<CompiledName("GetOrder")>]
@@ -56,3 +58,25 @@ let getOrder prologSolution =
                     cookiesVar.Value
                     candiesVar.Value
             |> parseOrder
+
+let getAllOrdersForDateTime (dateTime : DateTime) = async {
+    let prolog = PrologEngine()
+
+    let! solutions =
+        getSolutions prolog
+                     "Data\\orders.pl"
+                     "order(Name, DateTime, Address, MinAge, MaxAge, Cake, Cookies, Candies)"
+
+    return trial {
+        let! solutions = solutions
+        let! orders =
+            solutions
+            |> List.map getOrder
+            |> Trial.sequence
+
+        return
+            orders
+            |> List.filter (fun order -> order.DateTime.Date = dateTime.Date)
+    }
+}
+
