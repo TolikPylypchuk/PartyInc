@@ -58,12 +58,12 @@ let handleResponse (response, state) =
                     let! existingOrders = existingOrders
 
                     let newState, partyName =
-                        if dateTime > DateTime.Now
-                        then
+                        if dateTime > DateTime.Now then
                             match existingOrders with
                             | [] -> SpecifiedDateTime (name, dateTime), None
                             | head :: _ -> ReservedDateTime name, Some head.Name
-                        else IncorrectDateTime name, None
+                        else
+                            IncorrectDateTime name, None
 
                     let! response =
                         (intent, newState |> PartyOrganizerState.getName)
@@ -139,7 +139,7 @@ let handleResponse (response, state) =
                 (intent, newState |> PartyOrganizerState.getName)
                 |> ResponseChoices.getResponseKey
                 |> getResponse
-            
+
             return response, newState
         }
         |> async.Return
