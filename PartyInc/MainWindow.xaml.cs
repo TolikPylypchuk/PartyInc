@@ -67,7 +67,7 @@ namespace PartyInc
 					Bot.RespondAsync(botInfo, state, address));
 				this.AddLine(bot, response);
 
-				const string minAge = "five";
+				const string minAge = "5";
 
 				this.AddLine(me, minAge);
 				(response, state) = await GetAsyncResult(
