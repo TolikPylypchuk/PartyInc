@@ -5,7 +5,7 @@ open Chessie.ErrorHandling
 open PartyInc.Core
 
 type ResponseHandler<'TState> =
-    delegate of Response * 'TState -> Result<string * 'TState, string> 
+    delegate of Response * 'TState -> Async<Result<string * 'TState, string>> 
 
 type BotInfo<'TState> = {
     Id: string
@@ -19,9 +19,13 @@ module Bot =
     let respondAsync<'TState> bot (state : 'TState) query =
         async {
             let! responseJson = Luis.requestAsync bot.Id bot.SubscriptionKey query
-            return
-                responseJson
-                >>= Luis.parseResponse
-                |> Trial.lift (fun response -> response, state)
-                >>= bot.Respond.Invoke
+            let result = trial {
+                let! responseJson = responseJson
+                let! response = responseJson |> Luis.parseResponse
+                return bot.Respond.Invoke(response, state)
+            }
+
+            match result with
+            | Ok (asyncResult, _) -> return! asyncResult
+            | Bad errors -> return (errors |> Bad)
         }

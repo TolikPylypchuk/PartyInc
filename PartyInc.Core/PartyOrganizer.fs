@@ -14,12 +14,15 @@ let handleResponse (response, state) =
     | "welcome", NotStarted ->
         getResponse intent
         |> Trial.lift (fun responseText -> responseText, NotStarted)
+        |> async.Return
     | "start", NotStarted ->
         getResponse intent
         |> Trial.lift (fun responseText -> responseText, Started)
+        |> async.Return
     | _, Started ->
         getResponse "input.name"
         |> Trial.lift (fun responseText -> responseText, SpecifiedName response.Query)
+        |> async.Return
     | "input.date-time", SpecifiedName name
     | "input.date-time", IncorrectDateTime name ->
         trial {
@@ -43,6 +46,8 @@ let handleResponse (response, state) =
                 then dateTime |> ok
                 else "Could not parse the date-time" |> fail
 
+
+
             let newState =
                 if dateTime > DateTime.Now
                 then SpecifiedDateTime (name, dateTime)
@@ -55,10 +60,12 @@ let handleResponse (response, state) =
 
             return response, newState
         }
+        |> async.Return
     | _, SpecifiedDateTime (name, dateTime) ->
         getResponse "input.address"
         |> Trial.lift (fun responseText ->
             responseText, SpecifiedAddress (name, dateTime, response.Query))
+        |> async.Return
     | "input.age", SpecifiedAddress (name, dateTime, address)
     | "input.age", IncorrectMinAge (name, dateTime, address) ->
         trial {
@@ -88,6 +95,7 @@ let handleResponse (response, state) =
 
             return response, newState
         }
+        |> async.Return
     | "input.age", SpecifiedMinAge (name, dateTime, address, minAge)
     | "input.age", IncorrectMaxAge (name, dateTime, address, minAge) ->
         trial {
@@ -117,6 +125,8 @@ let handleResponse (response, state) =
             
             return response, newState
         }
+        |> async.Return
     | _ ->
         getResponse "None"
         |> Trial.lift (fun response -> response, state)
+        |> async.Return
