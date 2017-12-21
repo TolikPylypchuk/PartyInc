@@ -43,6 +43,12 @@ module PartyOrganizerState =
         | SpecifiedFoodAndDrinks _ -> "food-drinks"
         | Finished _ -> "end"
 
+    [<CompiledName("IsAwaitingFood")>]
+    let isAwaitingFood = function SpecifiedMaxAge _ -> true | _ -> false
+
+    [<CompiledName("IsAwaitingDrinks")>]
+    let isAwaitingDrinks = function SpecifiedFood _ -> true | _ -> false
+
     [<CompiledName("AddFood")>]
     let addFood food state =
         match state with

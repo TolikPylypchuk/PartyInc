@@ -4,9 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" Loaded="Window_Loaded"
+		WindowStartupLocation="CenterScreen"
         Title="Party Inc" Height="350" Width="525">
-	<Grid>
-		<TextBox x:Name="test" IsReadOnly="True" TextWrapping="Wrap"
-		         VerticalScrollBarVisibility="Auto" FontFamily="Consolas" />
-    </Grid>
+	<Window.CommandBindings>
+		<CommandBinding Command="New"
+		                Executed="New_Executed" />
+	</Window.CommandBindings>
+	
+	<DockPanel>
+		<DockPanel DockPanel.Dock="Bottom">
+			<Button DockPanel.Dock="Right" Padding="5,2"
+					Command="New">
+				Enter
+			</Button>
+			<TextBox x:Name="userTextBox">
+				<TextBox.InputBindings>
+					<KeyBinding Command="New" Key="Return" />
+				</TextBox.InputBindings>
+			</TextBox>
+		</DockPanel>
+		<TextBox x:Name="contentTextBox" IsReadOnly="True" TextWrapping="Wrap"
+		         VerticalScrollBarVisibility="Auto" IsTabStop="False" />
+    </DockPanel>
 </Window>
