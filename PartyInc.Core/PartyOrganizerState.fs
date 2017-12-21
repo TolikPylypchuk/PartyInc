@@ -8,6 +8,7 @@ type PartyOrganizerState =
     | SpecifiedName     of string
     | SpecifiedDateTime of string * DateTime
     | IncorrectDateTime of string
+    | ReservedDateTime  of string
     | SpecifiedAddress  of string * DateTime * string
     | SpecifiedMinAge   of string * DateTime * string * int
     | IncorrectMinAge   of string * DateTime * string
@@ -27,6 +28,7 @@ module PartyOrganizerState =
         | SpecifiedName _ -> "name"
         | SpecifiedDateTime _ -> "date-time"
         | IncorrectDateTime _ -> "incorrect-date-time"
+        | ReservedDateTime _ -> "reserved-date-time"
         | SpecifiedAddress _ -> "address"
         | SpecifiedMinAge _ -> "min-age"
         | IncorrectMinAge _ -> "incorrect-min-age"

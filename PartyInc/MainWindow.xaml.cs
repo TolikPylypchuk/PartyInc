@@ -53,11 +53,18 @@ namespace PartyInc
 					Bot.RespondAsync(botInfo, state, name));
 				this.AddLine(bot, response);
 
-				const string dateTime = "next sunday at 18:00";
+				const string dateTime = "2017/12/30 at 18:00";
 
 				this.AddLine(me, dateTime);
 				(response, state) = await GetAsyncResult(
 					Bot.RespondAsync(botInfo, state, dateTime));
+				this.AddLine(bot, response);
+
+				const string dateTime2 = "next sunday at 18:00";
+
+				this.AddLine(me, dateTime2);
+				(response, state) = await GetAsyncResult(
+					Bot.RespondAsync(botInfo, state, dateTime2));
 				this.AddLine(bot, response);
 
 				const string address = "Kyivska st. 21";

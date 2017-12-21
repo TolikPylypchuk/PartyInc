@@ -49,6 +49,11 @@
 			"You should specify a date and time in the future, not the past."
 		]
 	],
+	"input.date-time:reserved-date-time": [
+		[
+			"You already have a party reserved for that day: $party"
+		]
+	],
 	"input.address": [
 		[
 			"Got it.",

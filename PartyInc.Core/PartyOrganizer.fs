@@ -24,43 +24,60 @@ let handleResponse (response, state) =
         |> Trial.lift (fun responseText -> responseText, SpecifiedName response.Query)
         |> async.Return
     | "input.date-time", SpecifiedName name
+    | "input.date-time", ReservedDateTime name
     | "input.date-time", IncorrectDateTime name ->
-        trial {
-            let! entities =
-                response.Entities
-                |> List.tryFind (fun entity ->
-                    entity.Type = "builtin.datetimeV2.date" ||
-                    entity.Type = "builtin.datetimeV2.datetime")
-                |> Trial.failIfNone "Could not find the date entity"
+        async {
+            let dateTime = trial {
+                let! entities =
+                    response.Entities
+                    |> List.tryFind (fun entity ->
+                        entity.Type = "builtin.datetimeV2.date" ||
+                        entity.Type = "builtin.datetimeV2.datetime")
+                    |> Trial.failIfNone "Could not find the date entity"
 
-            let! values = entities |> Luis.getEntityResolutionValues
+                let! values = entities |> Luis.getEntityResolutionValues
 
-            let (success, dateTime) =
-                values
-                |> List.head
-                |> (fun resValue -> resValue.Value)
-                |> DateTime.TryParse
+                let (success, dateTime) =
+                    values
+                    |> List.head
+                    |> (fun resValue -> resValue.Value)
+                    |> DateTime.TryParse
 
-            let! dateTime =
-                if success
-                then dateTime |> ok
-                else "Could not parse the date-time" |> fail
+                return!
+                    if success
+                    then dateTime |> ok
+                    else "Could not parse the date-time" |> fail
+            }
 
+            match dateTime with
+            | Bad errors -> return errors |> Bad
+            | Ok (dateTime, _) ->
+                let! existingOrders = PrologOrder.getAllOrdersForDateTime dateTime
 
+                return trial {
+                    let! existingOrders = existingOrders
 
-            let newState =
-                if dateTime > DateTime.Now
-                then SpecifiedDateTime (name, dateTime)
-                else IncorrectDateTime name
+                    let newState, partyName =
+                        if dateTime > DateTime.Now
+                        then
+                            match existingOrders with
+                            | [] -> SpecifiedDateTime (name, dateTime), None
+                            | head :: _ -> ReservedDateTime name, Some head.Name
+                        else IncorrectDateTime name, None
 
-            let! response =
-                (intent, newState |> PartyOrganizerState.getName)
-                |> ResponseChoices.getResponseKey
-                |> getResponse
+                    let! response =
+                        (intent, newState |> PartyOrganizerState.getName)
+                        |> ResponseChoices.getResponseKey
+                        |> getResponse
 
-            return response, newState
+                    let response =
+                        partyName
+                        |> Option.fold (fun (res : string) name -> res.Replace("$party", name))
+                                       response
+
+                    return response, newState
+                }
         }
-        |> async.Return
     | _, SpecifiedDateTime (name, dateTime) ->
         getResponse "input.address"
         |> Trial.lift (fun responseText ->
