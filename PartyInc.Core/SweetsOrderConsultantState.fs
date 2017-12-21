@@ -2,6 +2,7 @@
 
 type SweetsOrderConsultantState =
     | SweetsEmptyOrder
+    | SweetsNotEmptyOrder                          of Food
     | StartedCake                                  of Food
     | StartedCakeStartedPreferences                of Food * Preferences
     | StartedCakeSpecifiedPrice                    of Food * decimal
@@ -21,11 +22,12 @@ type SweetsOrderConsultantState =
 module SweetsOrderConsultantState =
 
     [<CompiledName("Initial")>]
-    let initial = NotStarted
+    let initial = SweetsEmptyOrder
 
     let getName =
         function
         | SweetsEmptyOrder -> "sweets-empty-order"
+        | SweetsNotEmptyOrder _ -> "sweets-not-empty-order"
         | StartedCake _ -> "started-cake"                            
         | StartedCakeStartedPreferences _ -> "cake-started-preferences"             
         | StartedCakeSpecifiedPrice _ -> "cake-price" 
@@ -33,11 +35,11 @@ module SweetsOrderConsultantState =
         | StartedCakeFinishedPreferencesSpecifiedPrice _ -> "cake-finished-preferences-price"
         | SpecifiedCake _ -> "specified-cake"                              
         | StartedCandy _ -> "started-candy"                              
-        | StartedCandySpecifiedPrice _ -> "candy-price"     
+        | StartedCandySpecifiedPrice _ -> "sweets-price"     
         | StartedCandySpecifiedPriceAndWeight _ -> "candy-price-weight"
         | SpecifiedCandy _ -> "specified-candy"                          
         | StartedCookie _ -> "started-cookie"                            
-        | StartedCookieSpecifiedPrice _ -> "cookie-price"        
+        | StartedCookieSpecifiedPrice _ -> "sweets-price"        
         | StartedCookieSpecifiedPriceAndWeight _ -> "cookie-price-weight"        
         | SpecifiedCookie _ -> "specified-cookie"                       
 

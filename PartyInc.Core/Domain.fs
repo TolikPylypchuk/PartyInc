@@ -19,7 +19,7 @@ type Cookie = Cookie of SweetInfo
 type Candy = Candy of SweetInfo
 
 type Food = {
-    Cake: Cake
+    Cake: Cake option
     Cookies: Cookie list
     Candies: Candy list
 }
