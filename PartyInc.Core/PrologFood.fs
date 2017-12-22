@@ -85,11 +85,11 @@ let getByQuery getter query = async {
     }
 }
 
-let formatIngredients ingredients =
+let formatList ingredients =
     let rec formatIngredientsInner ingredients =
         match ingredients with
         | [] -> ""
-        | [ ingredient ] -> sprintf "%s " ingredient
+        | [ ingredient ] -> ingredient
         | head :: tail -> sprintf "%s, %s" head (tail |> formatIngredientsInner)
 
     sprintf "[ %s ]" (ingredients |> formatIngredientsInner)
@@ -117,9 +117,27 @@ let getCakesByPriceLessThan price =
     getCakesByQuery (sprintf "getCakeByPriceLessThan(%i, cake(Name, Ingredients, Price))" price)
 
 let getCakesByIngredientsInclude ingredients =
-    let format = ingredients |> formatIngredients
+    let format = ingredients |> List.map (fun i -> sprintf "\"%s\"" i) |> formatList
     getCakesByQuery (sprintf "getCakeByIngredientsInclude(%s, cake(Name, Ingredients, Price))" format)
 
 let getCakesByIngredientsExclude ingredients =
-    let format = ingredients |> formatIngredients
+    let format = ingredients |> List.map (fun i -> sprintf "\"%s\"" i) |> formatList
     getCakesByQuery (sprintf "getCakeByIngredientsExclude(%s, cake(Name, Ingredients, Price))" format)
+
+let formatCake (cake : Cake) =
+    sprintf "cake(\"%s\", %s, %s)"
+            cake.Name
+            (cake.Ingredients |> List.map (fun i -> sprintf "\"%s\"" i) |> formatList)
+            (cake.Price.ToString("0.#"))
+
+let formatCandy (Candy candy) =
+    sprintf "candy(\"%s\", %s, %s)"
+            candy.Name
+            (candy.Price.ToString("0.0"))
+            (candy.Weight.ToString("0.0"))
+
+let formatCookie (Cookie cookie) =
+    sprintf "cookie(\"%s\", %s, %s)"
+            cookie.Name
+            (cookie.Price.ToString("0.0"))
+            (cookie.Weight.ToString("0.0"))

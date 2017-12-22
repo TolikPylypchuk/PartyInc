@@ -52,7 +52,7 @@ let handleResponse (response, state) =
             match dateTime with
             | Bad errors -> return errors |> Bad
             | Ok (dateTime, _) ->
-                let! existingOrders = PrologOrder.getAllOrdersForDateTime dateTime
+                let! existingOrders = PrologOrder.getAllOrdersForDate dateTime
 
                 return trial {
                     let! existingOrders = existingOrders
