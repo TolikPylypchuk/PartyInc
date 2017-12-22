@@ -14,5 +14,11 @@
     <Setting Name="PartyOrganizerSubscriptionKey" Type="System.String" Scope="User">
       <Value Profile="(Default)">03df50f3cde84da9a799ae6516dfc21e</Value>
     </Setting>
+    <Setting Name="DrinksOrderConsultantId" Type="System.String" Scope="User">
+      <Value Profile="(Default)">d2c55d8d-6774-407a-925b-22c4769daeff</Value>
+    </Setting>
+    <Setting Name="DrinksOrderConsultantSubscriptionKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">5f2333f63aa34e96a9a6cd72ead5ff61</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
