@@ -28,6 +28,7 @@ type Drink = {
     Name: string
     Ingredients: string list
     Price: decimal
+    Amount: int
 }
 
 type Order = {
