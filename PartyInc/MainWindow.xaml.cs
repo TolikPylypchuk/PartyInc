@@ -15,14 +15,16 @@ namespace PartyInc
 		enum CurrentBot { PartyOrganizer, SweetsOrderConsultant, DrinksOrderConsultant }
 
 		private BotInfo<PartyOrganizerState> partyOrganizer;
-		private BotInfo<SweetsOrderConsultantState> sweetsOrderConsultant;
+		// TODO private BotInfo<SweetsOrderConsultantState> sweetsOrderConsultant;
+		// TODO private BotInfo<DrinksOrderConsultantState> drinksOrderConsultant;
 
 		private PartyOrganizerState partyOrganizerState = PartyOrganizerStateModule.Initial;
-		private SweetsOrderConsultantState sweetsOrderConsultantState;
+		// TODO private SweetsOrderConsultantState sweetsOrderConsultantState;
+		// TODO private DrinksOrderConsultantState sweetsOrderConsultantState;
 
 		private CurrentBot currentBot = CurrentBot.PartyOrganizer;
 
-		private const string me = " me";
+		private const string me  = " me";
 		private const string bot = "bot";
 
         public MainWindow()
@@ -34,12 +36,19 @@ namespace PartyInc
 				Settings.Default.PartyOrganizerSubscriptionKey,
 				PartyOrganizer.HandleResponse);
 
+			// TODO
 			//this.sweetsOrderConsultant = new BotInfo<SweetsOrderConsultantState>(
-			//	Settings.Default.PartyOrganizerId,
-			//	Settings.Default.PartyOrganizerSubscriptionKey,
+			//	Settings.Default.SweetsOrderConsultantId,
+			//	Settings.Default.SweetsOrderConsultantSubscriptionKey,
 			//	SweetsOrderConsultant.HandleResponse);
+
+			// TODO
+			//this.drinksOrderConsultant = new BotInfo<DrinksOrderConsultantState>(
+			//	Settings.Default.DrinksOrderConsultantId,
+			//	Settings.Default.DrinksOrderConsultantSubscriptionKey,
+			//	DrinksOrderConsultant.HandleResponse);
 		}
-		
+
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			this.AddLine(
@@ -80,23 +89,51 @@ namespace PartyInc
 						{
 							this.currentBot = CurrentBot.DrinksOrderConsultant;
 						}
-						break;
-					case CurrentBot.SweetsOrderConsultant:
-						var newSweetsOrderConsultantState =
-							await this.Respond(
-								this.sweetsOrderConsultant,
-								this.sweetsOrderConsultantState,
-								text);
-						
-						this.sweetsOrderConsultantState = newSweetsOrderConsultantState;
 
-						if (false) // TODO change to 'is finished'
+						if (PartyOrganizerStateModule.IsFinished(newPartyOrganizerState))
 						{
-							this.currentBot = CurrentBot.PartyOrganizer;
+							this.SaveOrder(
+								GetResult(PartyOrganizerStateModule.GetOrder(
+									newPartyOrganizerState)));
 						}
 						break;
+					case CurrentBot.SweetsOrderConsultant:
+						// var newSweetsOrderConsultantState =
+						//	await this.Respond(
+						//		this.sweetsOrderConsultant,
+						//		this.sweetsOrderConsultantState,
+						//		text);
+
+						// this.sweetsOrderConsultantState = newSweetsOrderConsultantState;
+
+						// TODO implement IsFinished for SweetsOrderConsultantState module
+						// if (SweetsOrderConsultantStateModule.IsFinished(state))
+						// {
+						// 	this.currentBot = CurrentBot.PartyOrganizer;
+						//	this.partyOrganizerState =
+						//		PartyOrganizerStateModule.AddFood(
+						//			this.sweetsOrderConsultantState,
+						//			this.partyOrganizerState);
+						// }
+						break;
 					case CurrentBot.DrinksOrderConsultant:
-						// TODO same as drinks order consultant
+						// var newDrinksOrderConsultantState =
+						//	await this.Respond(
+						//		this.drinksOrderConsultant,
+						//		this.drinksOrderConsultantState,
+						//		text);
+
+						// this.sweetsOrderConsultantState = newSweetsOrderConsultantState;
+
+						// TODO implement IsFinished for DrinksOrderConsultantState module
+						// if (SweetsOrderConsultantStateModule.IsFinished(state))
+						// {
+						// 	this.currentBot = CurrentBot.PartyOrganizer;
+						//	this.partyOrganizerState =
+						//		PartyOrganizerStateModule.AddFood(
+						//			this.sweetsOrderConsultantState,
+						//			this.partyOrganizerState);
+						// }
 						break;
 				}
 			} catch (Exception exp)
@@ -125,6 +162,11 @@ namespace PartyInc
 		private void AddLine(string party, string text = "")
 		{
 			this.contentTextBox.Text += $"{party}: {text}\n\n";
+		}
+
+		private void SaveOrder(Order order)
+		{
+
 		}
 	}
 }

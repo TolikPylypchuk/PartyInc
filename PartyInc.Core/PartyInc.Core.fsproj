@@ -98,8 +98,8 @@
     <Compile Include="ResolutionConverter.fs" />
     <Compile Include="Json.fs" />
     <Compile Include="Luis.fs" />
-    <Compile Include="PartyOrganizerState.fs" />
     <Compile Include="SweetsOrderConsultantState.fs" />
+    <Compile Include="PartyOrganizerState.fs" />
     <Compile Include="ResponseChoices.fs" />
     <Compile Include="PartyOrganizer.fs" />
     <Compile Include="SweetsOrderConsultant.fs" />

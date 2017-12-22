@@ -2,6 +2,8 @@
 
 open System
 
+open Chessie.ErrorHandling
+
 type PartyOrganizerState =
     | NotStarted
     | Started
@@ -14,10 +16,12 @@ type PartyOrganizerState =
     | IncorrectMinAge        of string * DateTime * string
     | SpecifiedMaxAge        of string * DateTime * string * int * int
     | IncorrectMaxAge        of string * DateTime * string * int
+    | GoToFood               of string * DateTime * string * int * int
     | SpecifiedFood          of string * DateTime * string * int * int * Food
-    | SpecifiedDrinks        of string * DateTime * string * int * int * Drink list
-    | SpecifiedFoodAndDrinks of string * DateTime * string * int * int * Food * Drink list
+    | GoToDrinks             of string * DateTime * string * int * int * Food
+    | SpecifiedDrinks        of string * DateTime * string * int * int * Food * Drink list
     | Finished               of Order
+    | Canceled
 
 [<RequireQualifiedAccess>]
 module PartyOrganizerState =
@@ -38,29 +42,45 @@ module PartyOrganizerState =
         | IncorrectMinAge _ -> "incorrect-min-age"
         | SpecifiedMaxAge _ -> "max-age"
         | IncorrectMaxAge _ -> "incorrect-max-age"
+        | GoToFood _ -> "go-to-food"
         | SpecifiedFood _ -> "food"
+        | GoToDrinks _ -> "go-to-drinks"
         | SpecifiedDrinks _ -> "drinks"
-        | SpecifiedFoodAndDrinks _ -> "food-drinks"
         | Finished _ -> "end"
+        | Canceled -> "canceled"
 
     [<CompiledName("IsAwaitingFood")>]
-    let isAwaitingFood = function SpecifiedMaxAge _ -> true | _ -> false
+    let isAwaitingFood = function GoToFood _ -> true | _ -> false
 
     [<CompiledName("IsAwaitingDrinks")>]
-    let isAwaitingDrinks = function SpecifiedFood _ -> true | _ -> false
+    let isAwaitingDrinks = function GoToDrinks _ -> true | _ -> false
 
+    [<CompiledName("IsFinished")>]
+    let isFinished = function Finished _ -> true | _ -> false
+
+    [<CompiledName("GetOrder")>]
+    let getOrder = function Finished order -> order |> ok | _ -> "Order not finished" |> fail
+
+    // TODO Implement this when other bots' states are ready
+    // TODO Rename 'LastState' to actual state
+    (*
     [<CompiledName("AddFood")>]
-    let addFood food state =
-        match state with
-        | SpecifiedMaxAge (name, dateTime, address, minAge, maxAge) ->
-            SpecifiedFood (name, dateTime, address, minAge, maxAge, food)
-        | state -> state
+    let addFood sweetOrderConsultantState partyOrganizerState =
+        match partyOrganizerState with
+        | GoToFood (name, dateTime, address, minAge, maxAge) ->
+            match sweetOrderConsultantState with
+            | LastState food ->
+                SpecifiedFood (name, dateTime, address, minAge, maxAge, food)
+            | _ -> state
+        | _ -> state
 
     [<CompiledName("AddDrinks")>]
-    let addDrinks drinks state =
-        match state with
-        | SpecifiedMaxAge (name, dateTime, address, minAge, maxAge) ->
-            SpecifiedDrinks (name, dateTime, address, minAge, maxAge, drinks)
-        | SpecifiedFood (name, dateTime, address, minAge, maxAge, food) ->
-            SpecifiedFoodAndDrinks (name, dateTime, address, minAge, maxAge, food, drinks)
-        | state -> state
+    let addDrinks drinksOrderConsultantState partyOrganizerState =
+        match partyOrganizerState with
+        | GoToDrinks (name, dateTime, address, minAge, maxAge, food)
+            match drinksOrderConsultantState with
+            | LastState drinks ->
+                SpecifiedDrinks (name, dateTime, address, minAge, maxAge, food, drinks)
+            | _ -> state
+        | _ -> state
+    *)

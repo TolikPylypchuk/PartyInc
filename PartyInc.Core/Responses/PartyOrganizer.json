@@ -91,6 +91,45 @@
 			"Maximum age should not be less than minimum age."
 		]
 	],
+	"yes:go-to-food": [
+		[
+			"You can order a cake, some candies and cookies."
+		],
+		[
+			"What would you like to order?"
+		]
+	],
+	"no:food": [
+		[
+			"Would you like to order some drinks for the party?"
+		]
+	],
+	"yes:go-to-drinks": [
+		[
+			"What would you like to order?"
+		]
+	],
+	"no:drinks": [
+		[
+			"OK."
+		],
+		[
+			"Confirm order?"
+		]
+	],
+	"yes:end": [
+		[
+			"OK, your party order is created."
+		],
+		[
+			"Thanks for using Party Inc!"
+		]
+	],
+	"no:canceled": [
+		[
+			"OK, order canceled"
+		]
+	],
 	"None": [
 		[
 			"Sorry.",

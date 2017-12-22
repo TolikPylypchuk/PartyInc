@@ -143,6 +143,61 @@ let handleResponse (response, state) =
             return response, newState
         }
         |> async.Return
+    | "yes", SpecifiedMaxAge (name, dateTime, address, minAge, maxAge) ->
+        let newState = GoToFood (name, dateTime, address, minAge, maxAge)
+
+        (intent, newState |> PartyOrganizerState.getName)
+        |> ResponseChoices.getResponseKey
+        |> getResponse
+        |> Trial.lift (fun responseText -> responseText, newState)
+        |> async.Return
+    | "no", SpecifiedMaxAge (name, dateTime, address, minAge, maxAge) ->
+        let food = { Cake = None; Cookies = []; Candies = [] }
+        let newState = SpecifiedFood (name, dateTime, address, minAge, maxAge, food)
+
+        (intent, newState |> PartyOrganizerState.getName)
+        |> ResponseChoices.getResponseKey
+        |> getResponse
+        |> Trial.lift (fun responseText -> responseText, newState)
+        |> async.Return
+    | "yes", SpecifiedFood (name, dateTime, address, minAge, maxAge, food) ->
+        let newState = GoToDrinks (name, dateTime, address, minAge, maxAge, food)
+
+        (intent, newState |> PartyOrganizerState.getName)
+        |> ResponseChoices.getResponseKey
+        |> getResponse
+        |> Trial.lift (fun responseText -> responseText, newState)
+        |> async.Return
+    | "no", SpecifiedFood (name, dateTime, address, minAge, maxAge, food) ->
+        let newState = SpecifiedDrinks (name, dateTime, address, minAge, maxAge, food, [])
+
+        (intent, newState |> PartyOrganizerState.getName)
+        |> ResponseChoices.getResponseKey
+        |> getResponse
+        |> Trial.lift (fun responseText -> responseText, newState)
+        |> async.Return
+    | "yes", SpecifiedDrinks (name, dateTime, address, minAge, maxAge, food, drinks) ->
+        let newState = Finished {
+            Name = name
+            DateTime = dateTime
+            Address = address
+            MinAge = minAge
+            MaxAge = maxAge
+            Food = food
+            Drinks = drinks
+        }
+
+        (intent, newState |> PartyOrganizerState.getName)
+        |> ResponseChoices.getResponseKey
+        |> getResponse
+        |> Trial.lift (fun responseText -> responseText, newState)
+        |> async.Return
+    | "no", SpecifiedDrinks _ ->
+        (intent, Canceled |> PartyOrganizerState.getName)
+        |> ResponseChoices.getResponseKey
+        |> getResponse
+        |> Trial.lift (fun responseText -> responseText, Canceled)
+        |> async.Return
     | _ ->
         getResponse "None"
         |> Trial.lift (fun response -> response, state)
