@@ -1,0 +1,79 @@
+﻿{
+  "order": [
+    [
+      "Great!"
+    ],
+    [
+      "What price range dou you expect?",
+      " What about a price range?"
+    ]
+  ],
+  "custom_price": [
+    [
+      "Awesome!",
+      "Great"
+    ],
+    [
+      "What drink would you like to order?",
+      "What drink would you like to?"
+    ]
+  ],
+  "drink": [
+    [
+      "Great choice!",
+      "Nice choice!"
+    ],
+    [
+      "Do you want to add some ingredients?",
+      "Would you like to include some ingredients?"
+    ]
+  ],
+  "drink-no": [
+    [
+      "Okay"
+    ],
+    [
+      "How many drinks do you want?"
+    ]
+  ],
+  "drink-yes": [
+    [
+      "What ingredients do you want to include?",
+      "What would you like to add?"
+    ]
+  ],
+  "drinks_count": [
+    [
+      "Okay. Got it!",
+      "Good"
+    ],
+    [
+      "Your order is being prepared!"
+    ]
+  ],
+  "ingredients": [
+    [
+      "Great!",
+      "Awesome!"
+    ],
+    [
+      "What about some more ingredients? Would you like to add something?",
+      "Would you like to add something more?"
+    ]
+  ],
+  "ingredients-yes": [
+    [
+      "What would you like?",
+      "What do you want?",
+      "Which one would you like?"
+    ]
+  ],
+  "ingredients-no": [
+    [
+      "Okay"
+    ],
+    [
+      "How many drinks do you want?"
+    ]
+  ]
+}

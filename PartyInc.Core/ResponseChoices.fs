@@ -20,6 +20,8 @@ let partyOrganizer = getFromFile "Responses\\PartyOrganizer.json"
 
 let sweetsOrderConsultant = getFromFile "Responses\\SweetsOrderConsultant.json"
 
+let drinksOrderConsultant = getFromFile "Responses\\DrinksOrderConsultant.json"
+
 let getResponse map intent =
     map
     |> Trial.lift
