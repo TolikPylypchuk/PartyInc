@@ -11,12 +11,13 @@ type SweetsOrderConsultantState =
     | SpecifiedCake                                of Food * string
     | StartedCandy                                 of Food
     | StartedCandySpecifiedPrice                   of Food * decimal
-    | StartedCandySpecifiedPriceAndWeight          of Food * decimal * decimal
     | SpecifiedCandy                               of Food * string
+    | StartedCandySpecifiedName                    of Food * string
     | StartedCookie                                of Food
     | StartedCookieSpecifiedPrice                  of Food * decimal
-    | StartedCookieSpecifiedPriceAndWeight         of Food * decimal * decimal
     | SpecifiedCookie                              of Food * string
+    | StartedCookieSpecifiedName                   of Food * string
+    | FinishedOrder                                of Food
 
 [<RequireQualifiedAccess>]
 module SweetsOrderConsultantState =
@@ -35,11 +36,12 @@ module SweetsOrderConsultantState =
         | StartedCakeFinishedPreferencesSpecifiedPrice _ -> "cake-finished-preferences-price"
         | SpecifiedCake _ -> "specified-cake"                              
         | StartedCandy _ -> "started-candy"                              
-        | StartedCandySpecifiedPrice _ -> "sweets-price"     
-        | StartedCandySpecifiedPriceAndWeight _ -> "candy-price-weight"
-        | SpecifiedCandy _ -> "specified-candy"                          
+        | StartedCandySpecifiedPrice _ -> "candy-price"     
+        | SpecifiedCandy _ -> "specified-candy"
+        | StartedCandySpecifiedName _ -> "candy-name"                          
         | StartedCookie _ -> "started-cookie"                            
-        | StartedCookieSpecifiedPrice _ -> "sweets-price"        
-        | StartedCookieSpecifiedPriceAndWeight _ -> "cookie-price-weight"        
-        | SpecifiedCookie _ -> "specified-cookie"                       
+        | StartedCookieSpecifiedPrice _ -> "cookie-price"            
+        | SpecifiedCookie _ -> "specified-cookie" 
+        | StartedCookieSpecifiedName _ -> "cookie-name" 
+        | FinishedOrder _ -> "finished_order"
 

@@ -1,5 +1,5 @@
 {
-  "order.all.price:cake-price": [
+  "order.all.price": [
     [
       "Okay.",
       "All right.",
@@ -7,23 +7,11 @@
     ],
     [
       "Then we can suggest you the following to order:",
-      "Then the following cakes will suit you:",
+      "Then the following sweets will suit you:",
       "Taking into account what you have said, there are some suitable variants. Here is the list:"
     ],
     [
       "{candies|cookies|cakes}"
-    ]
-  ],
-  "order.all.price:sweets-price": [
-    [
-      "Okay.",
-      "All right.",
-      "Good that."
-    ],
-    [
-      "How much do you want to order?",
-      "What about the weight?",
-      "And weight?"
     ]
   ],
   "order.cake": [
@@ -48,10 +36,9 @@
       "Good that."
     ],
     [
-      "Then any cakes will suit you. We have these:"
-    ],
-    [
-      "{cakes}"
+      "What about the price?",
+      "Do you want also to specify price?",
+      "Or maybe a price range?"
     ]
   ],
   "order.cake.preferences-yes": [
@@ -122,7 +109,7 @@
   ],
   "order.stop": [
     [
-      "Thank you for your order. Have a nice day!"
+      "Thank you for your order."
     ]
   ],
   "order.sweets": [
@@ -132,9 +119,9 @@
       "Sure."
     ],
     [
-      "What about price per kilogram?",
-      "Do you want also to specify price per kilogram?",
-      "What's the price per kilogram range?"
+      "What about the price?",
+      "Specify, please, the price?",
+      "A price range then?"
     ]
   ],
   "order.sweets.specify": [
