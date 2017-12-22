@@ -4,6 +4,7 @@ open FParsec
 
 open Parsers
 open FoodParsers
+open DrinkParsers
 
 let pOrder =
     let pOrderInner =
@@ -23,6 +24,8 @@ let pOrder =
             let! cookies = pList pCookie
             do! pComma
             let! candies = pList pCandy
+            do! pComma
+            let! drinks = pList pDrink
 
             return {
                 Name = name
@@ -31,7 +34,7 @@ let pOrder =
                 MinAge = minAge
                 MaxAge = maxAge
                 Food = { Cake = Some cake; Cookies = cookies; Candies = candies }
-                Drinks = []
+                Drinks = drinks
             }
         }
 
@@ -49,6 +52,8 @@ let pOrder =
             let! cookies = pList pCookie
             do! pComma
             let! candies = pList pCandy
+            do! pComma
+            let! drinks = pList pDrink
 
             return {
                 Name = name
@@ -57,7 +62,7 @@ let pOrder =
                 MinAge = minAge
                 MaxAge = maxAge
                 Food = { Cake = None; Cookies = cookies; Candies = candies }
-                Drinks = []
+                Drinks = drinks
             }
         }
 

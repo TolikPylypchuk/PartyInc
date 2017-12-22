@@ -18,3 +18,6 @@ let getVariables (solution : Solution) =
     solution.NextVariable
     |> Seq.filter (fun var -> var.Name <> var.Value)
     |> Seq.toList
+    
+let formatList list =
+    sprintf "[ %s ]" (list |> List.reduce (sprintf "%s, %s"))

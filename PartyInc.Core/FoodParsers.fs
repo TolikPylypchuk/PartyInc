@@ -46,7 +46,7 @@ let pCake =
         let! price = pfloat
 
         return {
-            Name = name
+            Cake.Name = name
             Ingredients = ingredients
             Price = price |> decimal
         }

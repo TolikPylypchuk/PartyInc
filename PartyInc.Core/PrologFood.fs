@@ -85,15 +85,6 @@ let getByQuery getter query = async {
     }
 }
 
-let formatList ingredients =
-    let rec formatIngredientsInner ingredients =
-        match ingredients with
-        | [] -> ""
-        | [ ingredient ] -> ingredient
-        | head :: tail -> sprintf "%s, %s" head (tail |> formatIngredientsInner)
-
-    sprintf "[ %s ]" (ingredients |> formatIngredientsInner)
-
 let getCandiesByQuery = getByQuery getCandy
 let getCookiesByQuery = getByQuery getCookie
 let getCakesByQuery = getByQuery getCake
@@ -128,7 +119,7 @@ let formatCake (cake : Cake) =
     sprintf "cake(\"%s\", %s, %s)"
             cake.Name
             (cake.Ingredients |> List.map (fun i -> sprintf "\"%s\"" i) |> formatList)
-            (cake.Price.ToString("0.#"))
+            (cake.Price.ToString("0.0"))
 
 let formatCandy (Candy candy) =
     sprintf "candy(\"%s\", %s, %s)"

@@ -8,6 +8,7 @@ open Prolog
 open PrologInterop
 open OrderParsers
 open PrologFood
+open PrologDrinks
 
 [<CompiledName("GetOrder")>]
 let getOrder prologSolution =
@@ -85,7 +86,7 @@ let getAllOrdersForDate (dateTime : DateTime) = async {
 let formatOrder order =
     match order.Food.Cake with
     | Some cake ->
-        sprintf "order(\"%s\", \"%s\", \"%s\", %i, %i, %s, %s, %s)"
+        sprintf "order(\"%s\", \"%s\", \"%s\", %i, %i, %s, %s, %s, %s)"
             order.Name
             (order.DateTime.ToString("s"))
             order.Address
@@ -94,8 +95,9 @@ let formatOrder order =
             (cake |> formatCake)
             (order.Food.Cookies |> List.map formatCookie |> formatList)
             (order.Food.Candies |> List.map formatCandy  |> formatList)
+            (order.Drinks       |> List.map formatDrink  |> formatList)
     | None ->
-        sprintf "order(\"%s\", \"%s\", \"%s\", %i, %i, %s, %s)"
+        sprintf "order(\"%s\", \"%s\", \"%s\", %i, %i, %s, %s, %s)"
                 order.Name
                 (order.DateTime.ToString("s"))
                 order.Address
@@ -103,3 +105,4 @@ let formatOrder order =
                 order.MaxAge
                 (order.Food.Cookies |> List.map formatCookie |> formatList)
                 (order.Food.Candies |> List.map formatCandy  |> formatList)
+                (order.Drinks       |> List.map formatDrink  |> formatList)

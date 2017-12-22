@@ -64,6 +64,12 @@
     <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets'))" />
   </Target>
   <ItemGroup>
+    <None Include="Data\drinks.pl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\drink_queries.pl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\food.pl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -89,8 +95,10 @@
     <Compile Include="Domain.fs" />
     <Compile Include="Parsers.fs" />
     <Compile Include="FoodParsers.fs" />
+    <Compile Include="DrinkParsers.fs" />
     <Compile Include="OrderParsers.fs" />
     <Compile Include="PrologFood.fs" />
+    <Compile Include="PrologDrinks.fs" />
     <Compile Include="PrologOrder.fs" />
     <Compile Include="LuisDomain.fs" />
     <Compile Include="OptionConverter.fs" />

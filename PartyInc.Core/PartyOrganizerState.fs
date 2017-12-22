@@ -7,20 +7,20 @@ open Chessie.ErrorHandling
 type PartyOrganizerState =
     | NotStarted
     | Started
-    | SpecifiedName          of string
-    | SpecifiedDateTime      of string * DateTime
-    | IncorrectDateTime      of string
-    | ReservedDateTime       of string
-    | SpecifiedAddress       of string * DateTime * string
-    | SpecifiedMinAge        of string * DateTime * string * int
-    | IncorrectMinAge        of string * DateTime * string
-    | SpecifiedMaxAge        of string * DateTime * string * int * int
-    | IncorrectMaxAge        of string * DateTime * string * int
-    | GoToFood               of string * DateTime * string * int * int
-    | SpecifiedFood          of string * DateTime * string * int * int * Food
-    | GoToDrinks             of string * DateTime * string * int * int * Food
-    | SpecifiedDrinks        of string * DateTime * string * int * int * Food * Drink list
-    | Finished               of Order
+    | SpecifiedName     of string
+    | SpecifiedDateTime of string * DateTime
+    | IncorrectDateTime of string
+    | ReservedDateTime  of string
+    | SpecifiedAddress  of string * DateTime * string
+    | SpecifiedMinAge   of string * DateTime * string * int
+    | IncorrectMinAge   of string * DateTime * string
+    | SpecifiedMaxAge   of string * DateTime * string * int * int
+    | IncorrectMaxAge   of string * DateTime * string * int
+    | GoToFood          of string * DateTime * string * int * int
+    | SpecifiedFood     of string * DateTime * string * int * int * Food
+    | GoToDrinks        of string * DateTime * string * int * int * Food
+    | SpecifiedDrinks   of string * DateTime * string * int * int * Food * Drink list
+    | Finished          of Order
     | Canceled
 
 [<RequireQualifiedAccess>]
