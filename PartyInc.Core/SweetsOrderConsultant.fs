@@ -3,6 +3,7 @@
 open System
 
 open Chessie.ErrorHandling
+open PartyInc.Core
 
 [<CompiledName("HandleResponse")>]
 let handleResponse (response, state) =
@@ -33,7 +34,9 @@ let handleResponse (response, state) =
 
             let newState = StartedCakeFinishedPreferencesSpecifiedPrice (order, preferences, price)
             
-            let! responseText = getResponse intent
+            let! responseTextBase = getResponse intent
+
+            let responseText = responseTextBase.Replace("{candies|cookies|cakes}", "cakes")
 
             return responseText, newState 
         }
@@ -60,7 +63,9 @@ let handleResponse (response, state) =
 
             let newState = StartedCakeSpecifiedPrice (order, price)
             
-            let! responseText = getResponse intent
+            let! responseTextBase = getResponse intent
+
+            let responseText = responseTextBase.Replace("{candies|cookies|cakes}", "cakes")
 
             return responseText, newState 
         }
@@ -87,7 +92,9 @@ let handleResponse (response, state) =
 
             let newState = StartedCandySpecifiedPrice (order, price)
 
-            let! responseText = getResponse intent
+            let! responseTextBase = getResponse intent
+
+            let responseText = responseTextBase.Replace("{candies|cookies|cakes}", "candies")
 
             return responseText, newState 
         }
@@ -114,7 +121,9 @@ let handleResponse (response, state) =
 
             let newState = StartedCookieSpecifiedPrice (order, price)
             
-            let! responseText = getResponse intent
+            let! responseTextBase = getResponse intent
+
+            let responseText = responseTextBase.Replace("{candies|cookies|cakes}", "cookies")
 
             return responseText, newState 
         }
@@ -180,12 +189,15 @@ let handleResponse (response, state) =
     | "order.cake.preferences-yes-dislikes", StartedCakeStartedPreferences (order, preferences) ->
         trial {
             let! responseText = getResponse intent
-            
-            let newPreferences = preferences
         
-            //ToDo
-            //get ingredients and add them to newPreferences Include
-            
+            let! ingredients = 
+                response.Entities
+                |> List.filter (fun entity -> entity.Type = "ingredients")
+                |> List.map (Luis.getEntityResolutionStrings >> Trial.lift List.head)
+                |> Trial.sequence
+                
+            let newPreferences = { preferences with Exclude = List.concat[preferences.Exclude; ingredients]}
+
             let newState = StartedCakeStartedPreferences (order, newPreferences)
 
             return responseText, newState 
@@ -194,12 +206,15 @@ let handleResponse (response, state) =
     | "order.cake.preferences-yes-likes", StartedCakeStartedPreferences (order, preferences) ->
         trial {
             let! responseText = getResponse intent
-            
-            let newPreferences = preferences
         
-            //ToDo
-            //get ingredients and add them to newPreferences Include
-            
+            let! ingredients = 
+                response.Entities
+                |> List.filter (fun entity -> entity.Type = "ingredients")
+                |> List.map (Luis.getEntityResolutionStrings >> Trial.lift List.head)
+                |> Trial.sequence
+                
+            let newPreferences = { preferences with Include = List.concat[preferences.Include; ingredients]}
+
             let newState = StartedCakeStartedPreferences (order, newPreferences)
 
             return responseText, newState 
@@ -207,14 +222,17 @@ let handleResponse (response, state) =
         |> async.Return
     | "order.cake.preferences-yes-misunderstanding", StartedCakeStartedPreferences (order, preferences) ->
         trial {
-            let newState = StartedCakeStartedPreferences (order, preferences)
-            
-            let! responseText = getResponse intent
-            
-            //ToDo
-            //get all ingredients and replace {...} with them
+            let! responseTextBase = getResponse intent
+        
+            let! ingredients = 
+                response.Entities
+                |> List.filter (fun entity -> entity.Type = "ingredients")
+                |> List.map (Luis.getEntityResolutionStrings >> Trial.lift List.head)
+                |> Trial.sequence
+                
+            let responseText = responseTextBase.Replace("{ingredients}", ingredients |> List.reduce (sprintf "%s, %s"))
 
-            return responseText, newState 
+            return responseText, state 
         }
         |> async.Return
     | "order.cake.specify", StartedCakeSpecifiedPrice (order, price) -> 
@@ -296,16 +314,13 @@ let handleResponse (response, state) =
         |> async.Return
     | "order.sweets.weight", StartedCookieSpecifiedName (order, price) -> 
         trial {
-            let! strings = 
+            let! value = 
                 response.Entities
                 |> List.filter (fun entity -> entity.Type = "builtin.number")
                 |> List.head
-                |> Luis.getEntityResolutionStrings
-
-            let (success, weight) =
-                strings
-                |> List.head
-                |> Decimal.TryParse
+                |> Luis.getEntityResolutionValue
+                
+            let (success, weight) = value |> Decimal.TryParse
 
             let! weight =
                 if success

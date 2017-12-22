@@ -20,10 +20,10 @@ namespace PartyInc
 		// TODO private BotInfo<DrinksOrderConsultantState> drinksOrderConsultant;
 
 		private PartyOrganizerState partyOrganizerState = PartyOrganizerStateModule.Initial;
-		private SweetsOrderConsultantState sweetsOrderConsultantState;
+		private SweetsOrderConsultantState sweetsOrderConsultantState = SweetsOrderConsultantStateModule.Initial;
 		// TODO private DrinksOrderConsultantState sweetsOrderConsultantState;
 
-		private CurrentBot currentBot = CurrentBot.PartyOrganizer;
+		private CurrentBot currentBot = CurrentBot.SweetsOrderConsultant;
 
 		private const string me  = " me";
 		private const string bot = "bot";

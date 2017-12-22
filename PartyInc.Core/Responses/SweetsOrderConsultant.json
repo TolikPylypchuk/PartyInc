@@ -6,12 +6,12 @@
       "Good that."
     ],
     [
-      "Then we can suggest you the following to order:",
-      "Then the following sweets will suit you:",
-      "Taking into account what you have said, there are some suitable variants. Here is the list:"
+      "Then we can suggest you the following {candies|cookies|cakes} to order:",
+      "Then the following {candies|cookies|cakes} will suit you:",
+      "Taking into account what you have said, there are some suitable variants. Here is the list of {candies|cookies|cakes}:"
     ],
     [
-      "{candies|cookies|cakes}"
+      "{names}"
     ]
   ],
   "order.cake": [
@@ -24,11 +24,6 @@
       "Do you have any ingredients preferences?",
       "Are there ingredients you can't stand? Or, on the contrary, like the most?",
       "Any ingredients preferences?"
-    ],
-    [
-      "What about price?",
-      "Do you want also to specify price?",
-      "Or maybe a price range?"
     ]
   ],
   "order.cake.preferences-no": [
@@ -96,7 +91,7 @@
       "Sorry, what exactly do you mean?"
     ],
     [
-      "These ingridients: {indredients}, do you like or dislike them? Or are you allergic to them?"
+      "These ingridients: {ingredients}, do you like or dislike them? Or are you allergic to them?"
     ]
   ],
   "order.cake.specify": [
