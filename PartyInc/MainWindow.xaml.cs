@@ -16,11 +16,11 @@ namespace PartyInc
 		enum CurrentBot { PartyOrganizer, SweetsOrderConsultant, DrinksOrderConsultant }
 
 		private BotInfo<PartyOrganizerState> partyOrganizer;
-		// TODO private BotInfo<SweetsOrderConsultantState> sweetsOrderConsultant;
+		private BotInfo<SweetsOrderConsultantState> sweetsOrderConsultant;
 		// TODO private BotInfo<DrinksOrderConsultantState> drinksOrderConsultant;
 
 		private PartyOrganizerState partyOrganizerState = PartyOrganizerStateModule.Initial;
-		// TODO private SweetsOrderConsultantState sweetsOrderConsultantState;
+		private SweetsOrderConsultantState sweetsOrderConsultantState;
 		// TODO private DrinksOrderConsultantState sweetsOrderConsultantState;
 
 		private CurrentBot currentBot = CurrentBot.PartyOrganizer;
@@ -36,12 +36,11 @@ namespace PartyInc
 				Settings.Default.PartyOrganizerId,
 				Settings.Default.PartyOrganizerSubscriptionKey,
 				PartyOrganizer.HandleResponse);
-
-			// TODO
-			//this.sweetsOrderConsultant = new BotInfo<SweetsOrderConsultantState>(
-			//	Settings.Default.SweetsOrderConsultantId,
-			//	Settings.Default.SweetsOrderConsultantSubscriptionKey,
-			//	SweetsOrderConsultant.HandleResponse);
+			
+			this.sweetsOrderConsultant = new BotInfo<SweetsOrderConsultantState>(
+				Settings.Default.SweetsOrderConsultantId,
+				Settings.Default.SweetsOrderConsultantSubscriptionKey,
+				SweetsOrderConsultant.HandleResponse);
 
 			// TODO
 			//this.drinksOrderConsultant = new BotInfo<DrinksOrderConsultantState>(
@@ -99,23 +98,23 @@ namespace PartyInc
 						}
 						break;
 					case CurrentBot.SweetsOrderConsultant:
-						// var newSweetsOrderConsultantState =
-						//	await this.Respond(
-						//		this.sweetsOrderConsultant,
-						//		this.sweetsOrderConsultantState,
-						//		text);
+						var newSweetsOrderConsultantState =
+							await this.Respond(
+								this.sweetsOrderConsultant,
+								this.sweetsOrderConsultantState,
+								text);
 
-						// this.sweetsOrderConsultantState = newSweetsOrderConsultantState;
+						this.sweetsOrderConsultantState = newSweetsOrderConsultantState;
 
-						// TODO implement IsFinished for SweetsOrderConsultantState module
-						// if (SweetsOrderConsultantStateModule.IsFinished(state))
-						// {
-						// 	this.currentBot = CurrentBot.PartyOrganizer;
-						//	this.partyOrganizerState =
-						//		PartyOrganizerStateModule.AddFood(
-						//			this.sweetsOrderConsultantState,
-						//			this.partyOrganizerState);
-						// }
+						if (SweetsOrderConsultantStateModule.IsFinished(
+							newSweetsOrderConsultantState))
+						{
+						 	this.currentBot = CurrentBot.PartyOrganizer;
+							this.partyOrganizerState =
+								PartyOrganizerStateModule.AddFood(
+									this.sweetsOrderConsultantState,
+									this.partyOrganizerState);
+						}
 						break;
 					case CurrentBot.DrinksOrderConsultant:
 						// var newDrinksOrderConsultantState =

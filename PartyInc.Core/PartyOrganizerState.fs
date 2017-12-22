@@ -61,19 +61,20 @@ module PartyOrganizerState =
     [<CompiledName("GetOrder")>]
     let getOrder = function Finished order -> order |> ok | _ -> "Order not finished" |> fail
 
-    // TODO Implement this when other bots' states are ready
-    // TODO Rename 'LastState' to actual state
-    (*
+    
     [<CompiledName("AddFood")>]
     let addFood sweetOrderConsultantState partyOrganizerState =
         match partyOrganizerState with
         | GoToFood (name, dateTime, address, minAge, maxAge) ->
             match sweetOrderConsultantState with
-            | LastState food ->
+            | FinishedOrder food ->
                 SpecifiedFood (name, dateTime, address, minAge, maxAge, food)
-            | _ -> state
-        | _ -> state
+            | _ -> partyOrganizerState
+        | _ -> partyOrganizerState
 
+    // TODO Implement this when the drink order consultant's states are ready
+    // TODO Rename 'LastState' to actual state
+    (*
     [<CompiledName("AddDrinks")>]
     let addDrinks drinksOrderConsultantState partyOrganizerState =
         match partyOrganizerState with

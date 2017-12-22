@@ -45,3 +45,5 @@ module SweetsOrderConsultantState =
         | StartedCookieSpecifiedName _ -> "cookie-name" 
         | FinishedOrder _ -> "finished_order"
 
+    [<CompiledName("IsFinished")>]
+    let isFinished = function FinishedOrder _ -> true | _ -> false
