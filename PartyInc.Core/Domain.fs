@@ -27,7 +27,6 @@ type Food = {
 type Drink = {
     Name: string
     Ingredients: string list
-    Amount: int
     Price: decimal
 }
 
